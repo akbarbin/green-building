@@ -1,13 +1,22 @@
-import numpy as np
 import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 import matplotlib.pyplot as plt
 
+def create_range_list(start, end, step):
+    arr = []
+    current_value = start
+
+    while current_value <= end:
+        arr.append(current_value)
+        current_value += step
+
+    return arr
+
 def calculate_p69(raw_value):
   # New Antecedent/Consequent objects hold universe variables and membership
   # functions
-  p69 = ctrl.Antecedent(np.arange(0.0, 0.51, 0.01), 'Water Increasing Percentage (P69)')
-  decision_value1 = ctrl.Consequent(np.arange(0.0, 1.1, 0.1), 'Decision Value for P33, P34, P63, P69 & P71')
+  p69 = ctrl.Antecedent(create_range_list(0.0, 0.51, 0.01), 'Water Increasing Percentage (P69)')
+  decision_value1 = ctrl.Consequent(create_range_list(0.0, 1.1, 0.1), 'Decision Value for P33, P34, P63, P69 & P71')
 
   p69['Good'] = fuzz.trapmf(p69.universe, [0.0, 0.0, 0.1, 0.2])
   p69['Medium'] = fuzz.trapmf(p69.universe, [0.1, 0.2, 0.3, 0.4])

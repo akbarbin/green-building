@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template, redirect, url_for
-import numpy as np
 from fuzzy_logic.p33 import calculate_p33
 from fuzzy_logic.p34 import calculate_p34
 from fuzzy_logic.p63 import calculate_p63
@@ -12,18 +11,6 @@ import json
 import math
 
 app = Flask(__name__)
-
-def find_json_by(key, array, id):
-  for item in array:
-    if item[key] == id:
-      return item
-  return None
-
-def find_json_by_two_conditions(keys, array, values):
-  for item in array:
-    if item[keys[0]] == values[0] and item[keys[1]] == values[1]:
-      return item
-  return None
 
 @app.route('/')
 def index():
@@ -231,7 +218,7 @@ def evaluate(id):
       for month in months:
         values.append(building[f"{cx_param['code']}_{month}"])
 
-      slope = np.polyfit(months, values, 1)[0]
+      slope = calculate_slope(values)
       slope = 0.1 if slope == 0.0 else slope
       slope = slope + abs(slope) + 0.01 if slope < 0.0 else slope
 
@@ -309,3 +296,30 @@ def evaluate(id):
     file.write('\n') # Adding new line
   
   return redirect(url_for('show', id= id))
+
+def find_json_by(key, array, id):
+  for item in array:
+    if item[key] == id:
+      return item
+  return None
+
+def find_json_by_two_conditions(keys, array, values):
+  for item in array:
+    if item[keys[0]] == values[0] and item[keys[1]] == values[1]:
+      return item
+  return None
+
+def calculate_slope(time_series):
+  n = len(time_series)
+
+  # Calculate the mean of x (time indices) and y (time series values)
+  mean_x = sum(range(n)) / n
+  mean_y = sum(time_series) / n
+
+  # Calculate the slope (m) of the regression line
+  numerator = sum((i - mean_x) * (y - mean_y) for i, y in enumerate(time_series))
+  denominator = sum((i - mean_x) ** 2 for i in range(n))
+
+  slope = numerator / denominator
+
+  return slope
