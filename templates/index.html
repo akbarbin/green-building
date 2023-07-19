@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Building Performance List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            color: #e6d115;
+            background-color: #207e5c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Building List</h1>
+    <a href="/buildings/new">Add new building</a><br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Performance</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for building in buildings %}
+            <tr>
+                <td>{{ building.id }}</td>
+                <td>{{ building.name }}</td>
+                <td>{{ building.performance }}</td>
+                <td><a href="/buildings/{{ building.id }}">Show</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

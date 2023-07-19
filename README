@@ -1,0 +1,5 @@
+# Green Building Assessment
+
+cd C:\Users\lenovo\green-building
+.\.venv\Scripts\activate
+flask --app application run
