@@ -1,5 +1,7 @@
-# Green Building Assessment
+# Green Building Assessment (http://akbarbin.pythonanywhere.com/)
 
 cd C:\Users\lenovo\green-building
+py -3 -m venv .venv
 .\.venv\Scripts\activate
+pip install -r requirements.txt
 flask --app application run

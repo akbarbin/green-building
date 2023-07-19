@@ -9,6 +9,7 @@ from fuzzy_logic.p73 import calculate_p73
 from datetime import datetime
 import json
 import math
+import os
 
 app = Flask(__name__)
 
@@ -100,7 +101,9 @@ def create():
   json_data.append(form_data)
 
   # Saving array json_data into JSON file
-  with open('data/buildings.json', 'w') as file:
+  filename = 'data/buildings.json'
+  os.makedirs(os.path.dirname(filename), exist_ok=True)
+  with open(filename, 'w') as file:
     json.dump(json_data, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
 
@@ -291,10 +294,12 @@ def evaluate(id):
       if item['building_id'] == building['id']:
         item['dx'] = value
 
-  with open('data/performances.json', 'w') as file:
+  filename = 'data/performances.json'
+  os.makedirs(os.path.dirname(filename), exist_ok=True)
+  with open(filename, 'w') as file:
     json.dump(performances, file, indent=2, separators=(',', ': '))
-    file.write('\n') # Adding new line
-  
+    file.write('\n')  # Adding new line
+
   return redirect(url_for('show', id= id))
 
 def find_json_by(key, array, id):
@@ -323,3 +328,6 @@ def calculate_slope(time_series):
   slope = numerator / denominator
 
   return slope
+
+if __name__ == '__main__':
+  app.run()
