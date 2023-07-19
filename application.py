@@ -12,17 +12,22 @@ import math
 import os
 
 app = Flask(__name__)
+my_dir = os.path.dirname(__file__)
 
 @app.route('/')
 def index():
   try:
-    with open('data/buildings.json', 'r') as file:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
       buildings = json.load(file)
   except FileNotFoundError:
     buildings = []
 
   try:
-    with open('data/performances.json', 'r') as file:
+    filename = os.path.join(my_dir, 'data/performances.json')
+
+    with open(filename, 'r') as file:
       performances = json.load(file)
   except FileNotFoundError:
     performances = []
@@ -49,7 +54,9 @@ def create():
 
   # Reading JSON file
   try:
-    with open('data/buildings.json', 'r') as file:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
       json_data = json.load(file)
   except FileNotFoundError:
     json_data = []
@@ -101,8 +108,9 @@ def create():
   json_data.append(form_data)
 
   # Saving array json_data into JSON file
-  filename = 'data/buildings.json'
+  filename = os.path.join(my_dir, 'data/buildings.json')
   os.makedirs(os.path.dirname(filename), exist_ok=True)
+
   with open(filename, 'w') as file:
     json.dump(json_data, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
@@ -113,13 +121,17 @@ def create():
 def show(id):
   # Reading JSON file
   try:
-    with open('data/buildings.json', 'r') as file:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
       buildings = json.load(file)
   except FileNotFoundError:
     buildings = []
 
   try:
-    with open('data/performances.json', 'r') as file:
+    filename = os.path.join(my_dir, 'data/performances.json')
+
+    with open(filename, 'r') as file:
       performances = json.load(file)
   except FileNotFoundError:
     performances = []
@@ -136,13 +148,17 @@ def show(id):
 def evaluate(id):
   # Reading JSON file
   try:
-    with open('./parameters.json', 'r') as file:
+    filename = os.path.join(my_dir, 'parameters.json')
+
+    with open(filename, 'r') as file:
       parameters_json_data = json.load(file)
   except FileNotFoundError:
     parameters_json_data = []
 
   try:
-    with open('data/buildings.json', 'r') as file:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
       buildings_json_data = json.load(file)
   except FileNotFoundError:
     buildings_json_data = []
@@ -294,8 +310,9 @@ def evaluate(id):
       if item['building_id'] == building['id']:
         item['dx'] = value
 
-  filename = 'data/performances.json'
+  filename = os.path.join(my_dir, 'data/performances.json')
   os.makedirs(os.path.dirname(filename), exist_ok=True)
+
   with open(filename, 'w') as file:
     json.dump(performances, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
