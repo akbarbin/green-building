@@ -1,14 +1,14 @@
 from flask import Flask, request, render_template, redirect, url_for
-from lib.fuzzy_logic.p33 import calculate_p33
-from lib.fuzzy_logic.p34 import calculate_p34
-from lib.fuzzy_logic.p63 import calculate_p63
-from lib.fuzzy_logic.p69 import calculate_p69
-from lib.fuzzy_logic.p71 import calculate_p71
-from lib.fuzzy_logic.p72 import calculate_p72
-from lib.fuzzy_logic.p73 import calculate_p73
+import numpy as np
+from fuzzy_logic.p33 import calculate_p33
+from fuzzy_logic.p34 import calculate_p34
+from fuzzy_logic.p63 import calculate_p63
+from fuzzy_logic.p69 import calculate_p69
+from fuzzy_logic.p71 import calculate_p71
+from fuzzy_logic.p72 import calculate_p72
+from fuzzy_logic.p73 import calculate_p73
 from datetime import datetime
 import json
-import numpy as np
 import math
 
 app = Flask(__name__)
