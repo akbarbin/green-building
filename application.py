@@ -35,7 +35,7 @@ def index():
   for building in buildings:
     performance = find_json_by('building_id', performances, building['id'])
     if performance:
-      building['performance'] = round((performance['ax'] + performance['bx'] + performance['cx'] + performance['dx']) * 100, 2)
+      building['performance'] = performance
     else:
       building['performance'] = '-'
 
@@ -140,7 +140,7 @@ def show(id):
 
   performance = find_json_by('building_id', performances, id)
   if performance:
-    building['performance'] = round((performance['ax'] + performance['bx'] + performance['cx'] + performance['dx']) * 100, 2)
+    building['performance'] = performance
 
   return render_template('show.html', building=building)
 
@@ -335,6 +335,20 @@ def evaluate(id):
   with open(filename, 'w') as file:
     json.dump(performance_items, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
+
+  for performance in performances:
+    value = performance['ax'] + performance['bx'] + performance['cx'] + performance['dx']
+    performance['value'] = value
+
+    # Adding level
+    if value >= 0.45 and value <= 0.65:
+      performance['level'] = 'Bronze'
+    elif value > 0.65 and value <= 0.85:
+      performance['level'] = 'Silver'
+    elif value > 0.85 and value <= 1.0:
+      performance['level'] = 'Gold'
+    else:
+      performance['level'] = 'Not eligible'
 
   filename = os.path.join(my_dir, 'data/performances.json')
   os.makedirs(os.path.dirname(filename), exist_ok=True)

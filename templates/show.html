@@ -23,7 +23,7 @@
     p {
       font-size: 16px;
     }
-    .performance {
+    .green-item {
       font-size: 18px;
       color: #45a049;
     }
@@ -46,16 +46,23 @@
   <div class="container">
     <div class="building-info">
       <h1>{{ building['name'] }}</h1>
-      {% if building['performance'] %}
-        Performance: <span class="performance">{{ building['performance'] }}</span>
+      <p style="text-align: right;"><a href="/">Back to building list</a></p>
+
+      {% if building.performance %}
+        <p>Performance: <span class="green-item">{{ (building.performance['value'] * 100)|round(2, 'ceil') }}</span></p>
+        <p>Level: <span class="green-item">{{ building.performance['level'] }}</span></p>
+        <p>ax: <span class="green-item">{{ (building.performance['ax'] * 100)|round(2, 'ceil') }}</span></p>
+        <p>bx: <span class="green-item">{{ (building.performance['bx'] * 100)|round(2, 'ceil') }}</span></p>
+        <p>cx: <span class="green-item">{{ (building.performance['cx'] * 100)|round(2, 'ceil') }}</span></p>
+        <p>dx: <span class="green-item">{{ (building.performance['dx'] * 100)|round(2, 'ceil') }}</span></p>
       {% else %}
         <p>Click below link to evaluate the building</p>
         <form method="POST" action="/buildings/{{ building['id'] }}/evaluate">
           <input type="submit" value="Evaluate">
         </form>
       {% endif %}
-      <br><br>
-      <p>Policy</p>
+      <br>
+      <p class="green-item">Policy</p>
       <p>P01 - Public Transportation: {{ building['p01'] }}</p>
       <p>P02 - Energy Management: {{ building['p02'] }}</p>
       <p>P03 - Paint Material: {{ building['p03'] }}</p>
@@ -76,10 +83,9 @@
       <p>P18 - Periodic Maintenance: {{ building['p18'] }}</p>
       <p>P19 - Emergency Procedure: {{ building['p19'] }}</p>
       <p>P20 - Maintenance Training: {{ building['p20'] }}</p>
-      <p>P21 - Excellent Service Training: {{ building['p21'] }}</p>
+      <p>P21 - Excellent Service Training: {{ building['p21'] }}</p><br>
 
-      <br>
-      <p>Retrofit</p>
+      <p class="green-item">Retrofit</p>
       <p>P22 - AC Arrangement: {{ building['p22'] }}</p>
       <p>P23 - AC Standard: {{ building['p23'] }}</p>
       <p>P24 - Swith Area Coverage: {{ building['p24'] }}</p>
@@ -99,7 +105,7 @@
       <p>P38 - Independent Waste Management: {{ building['p38'] }}</p>
       <p>P39 - Waste Volume Recording: {{ building['p39'] }}</p><br>
 
-      <p>Construction</p>
+      <p class="green-item">Construction</p>
       <p>P40 - Initial Working Plan: {{ building['p40'] }}</p>
       <p>P41 - Continuing Project Improvement: {{ building['p41'] }}</p>
       <p>P42 - Data Integration Building: {{ building['p42'] }}</p>
@@ -126,7 +132,7 @@
       <p>P58 - Manual Tools Documentation: {{ building['p58'] }}</p>
       <p>P59 - Valid As Build Drawaing Report: {{ building['p59'] }}</p><br>
 
-      <p>Utilization</p>
+      <p class="green-item">Utilization</p>
       <p>P60 - Friendly Pest Material: {{ building['p60'] }}</p>
       <p>P61_1 - Energy Consumption of Last Month 1: {{ building['p61_1'] }}</p>
       <p>P61_2 - Energy Consumption of Last Month 2: {{ building['p61_2'] }}</p>
