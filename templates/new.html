@@ -75,13 +75,13 @@
     <input type="text" id="location" name="location" placeholder="Enter the building location"><br><br> -->
 
     <div class="sub-identitas">Policy</div>
-    <label for="p01">P01 - Public transportation:</label>
+    <label for="p01">P01 - Public Transportation:</label>
     <input type="radio" id="p01_yes" name="p01" value="Yes" {% if building["p01"] == "Yes" %}checked{% endif %}>
     <label for="p01_yes">Yes</label>
     <input type="radio" id="p01_yes" name="p01" value="No" {% if building["p01"] == "No" %}checked{% endif %}>
     <label for="p01_no">No</label><br><br>
 
-    <label for="p02">P02 - Energy management:</label>
+    <label for="p02">P02 - Energy Management:</label>
     <input type="radio" id="p02_yes" name="p02" value="Yes" {% if building['p02'] == "Yes" %}checked{% endif %}>
     <label for="p02_yes">Yes</label>
     <input type="radio" id="p02_yes" name="p02" value="No" {% if building['p02'] == "No" %}checked{% endif %}>
