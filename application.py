@@ -34,10 +34,7 @@ def index():
 
   for building in buildings:
     performance = find_json_by('building_id', performances, building['id'])
-    if performance:
-      building['performance'] = performance
-    else:
-      building['performance'] = '-'
+    if performance: building['performance'] = performance
 
   return render_template('index.html', buildings=buildings)
 
@@ -139,8 +136,7 @@ def show(id):
   building = find_json_by('id', buildings, id)
 
   performance = find_json_by('building_id', performances, id)
-  if performance:
-    building['performance'] = performance
+  if performance: building['performance'] = performance
 
   return render_template('show.html', building=building)
 

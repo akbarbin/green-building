@@ -60,7 +60,10 @@
         <form method="POST" action="/buildings/{{ building['id'] }}/evaluate">
           <input type="submit" value="Evaluate">
         </form>
-      {% endif %}
+      {% endif %}      
+      <br>
+      <p class="green-item">Detail</p>
+      <p>City: {{ building['city'] }}</p>
       <br>
       <p class="green-item">Policy</p>
       <p>P01 - Public Transportation: {{ building['p01'] }}</p>

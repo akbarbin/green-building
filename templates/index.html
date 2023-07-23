@@ -29,6 +29,7 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>City</th>
                 <th>Performance</th>
                 <th>Level</th>
                 <th>Action</th>
@@ -39,8 +40,14 @@
             <tr>
                 <td>{{ building.id }}</td>
                 <td>{{ building.name }}</td>
-                <td>{{ (building.performance.value * 100)|round(2, 'ceil') }}</td>
-                <td>{{ building.performance.level }}</td>
+                <td>{{ building.city }}</td>
+                {% if building.performance %}
+                    <td>{{ (building.performance.value * 100)|round(2, 'ceil') }}</td>
+                    <td>{{ building.performance.level }}</td>
+                {% else %}
+                    <td>-</td>
+                    <td>-</td>
+                {% endif %}
                 <td><a href="/buildings/{{ building.id }}">Show</a></td>
             </tr>
             {% endfor %}
