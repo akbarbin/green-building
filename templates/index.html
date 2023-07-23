@@ -42,8 +42,8 @@
                 <td>{{ building.name }}</td>
                 <td>{{ building.city }}</td>
                 {% if building.performance %}
-                    <td>{{ (building.performance.value * 100)|round(2, 'ceil') }}</td>
-                    <td>{{ building.performance.level }}</td>
+                    <td>{{ (building.performance * 100)|round(2, 'ceil') }}</td>
+                    <td>{{ building.level }}</td>
                 {% else %}
                     <td>-</td>
                     <td>-</td>

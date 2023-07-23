@@ -24,18 +24,6 @@ def index():
   except FileNotFoundError:
     buildings = []
 
-  try:
-    filename = os.path.join(my_dir, 'data/performances.json')
-
-    with open(filename, 'r') as file:
-      performances = json.load(file)
-  except FileNotFoundError:
-    performances = []
-
-  for building in buildings:
-    performance = find_json_by('building_id', performances, building['id'])
-    if performance: building['performance'] = performance
-
   return render_template('index.html', buildings=buildings)
 
 @app.route('/buildings/new')
@@ -125,18 +113,7 @@ def show(id):
   except FileNotFoundError:
     buildings = []
 
-  try:
-    filename = os.path.join(my_dir, 'data/performances.json')
-
-    with open(filename, 'r') as file:
-      performances = json.load(file)
-  except FileNotFoundError:
-    performances = []
-
   building = find_json_by('id', buildings, id)
-
-  performance = find_json_by('building_id', performances, id)
-  if performance: building['performance'] = performance
 
   return render_template('show.html', building=building)
 
@@ -165,8 +142,7 @@ def evaluate(id):
     if sub['group'] == 'ax':
       ax_params.append(sub)
 
-  performances = []
-  performance_items = []
+  assessments = []
   for building in buildings_json_data:
     total_ax = 0
     for ax_param in ax_params:
@@ -179,12 +155,12 @@ def evaluate(id):
       value = point * ax_param['weight']
 
       # Saving performance
-      performance_items.append({ "building_id": building['id'], "code": ax_param['code'], "point": point, "weight": ax_param['weight'], "value": value })
+      assessments.append({ "building_id": building['id'], "code": ax_param['code'], "point": point, "weight": ax_param['weight'], "value": value })
 
       total_ax += value
 
-    # Saving ax into performances
-    performances.append({ "id": building['id'], "building_id": building['id'], "ax": round(total_ax, 4) })
+    # Saving ax into building
+    building['ax'] = round(total_ax, 4)
 
   # bx
   bx_params = []
@@ -219,14 +195,12 @@ def evaluate(id):
       value = round(point * bx_param['weight'], 4)
 
       # Saving performance
-      performance_items.append({ "building_id": building['id'], "code": bx_param['code'], "point": point, "weight": bx_param['weight'], "value": value })
+      assessments.append({ "building_id": building['id'], "code": bx_param['code'], "point": point, "weight": bx_param['weight'], "value": value })
 
       total_bx += value
 
-    # Saving bx into performances
-    for item in performances:
-      if item['building_id'] == building['id']:
-        item['bx'] = round(total_bx, 4)
+    # Saving bx into building
+    building['bx'] = round(total_bx, 4)
 
   # cx
   cx_params = []
@@ -271,14 +245,12 @@ def evaluate(id):
       value = round(point['value'] * cx_param['weight'], 4)
 
       # Saving performance
-      performance_items.append({ "building_id": building['id'], "code": cx_param['code'], "point": point['value'], "weight": cx_param['weight'], "value": value })
+      assessments.append({ "building_id": building['id'], "code": cx_param['code'], "point": point['value'], "weight": cx_param['weight'], "value": value })
 
       total_cx += value
 
-    # Saving bx into performances
-    for item in performances:
-      if item['building_id'] == building['id']:
-        item['cx'] = round(total_cx, 4)
+    # Saving bx into building
+    building['cx'] = round(total_cx, 4)
 
   # dx
   dx_params = []
@@ -318,41 +290,39 @@ def evaluate(id):
       value = round(point['value'] * dx_param['weight'], 4)
 
       # Saving performance
-      performance_items.append({ "building_id": building['id'], "code": dx_param['code'], "point": point['value'], "weight": dx_param['weight'], "value": value })
+      assessments.append({ "building_id": building['id'], "code": dx_param['code'], "point": point['value'], "weight": dx_param['weight'], "value": value })
 
       total_dx += value
 
-    # Saving bx into performances
-    for item in performances:
-      if item['building_id'] == building['id']:
-        item['dx'] = round(total_dx, 4)
+    # Saving bx into building
+    building['dx'] = round(total_dx, 4)
 
-  filename = os.path.join(my_dir, 'data/performance_items.json')
+  filename = os.path.join(my_dir, 'data/assessments.json')
   os.makedirs(os.path.dirname(filename), exist_ok=True)
 
   with open(filename, 'w') as file:
-    json.dump(performance_items, file, indent=2, separators=(',', ': '))
+    json.dump(assessments, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
 
-  for performance in performances:
-    value = performance['ax'] + performance['bx'] + performance['cx'] + performance['dx']
-    performance['value'] = round(value, 4)
+  for building in buildings_json_data:
+    value = building['ax'] + building['bx'] + building['cx'] + building['dx']
+    building['performance'] = round(value, 4)
 
     # Adding level
     if value >= 0.45 and value <= 0.65:
-      performance['level'] = 'Bronze'
+      building['level'] = 'Bronze'
     elif value > 0.65 and value <= 0.85:
-      performance['level'] = 'Silver'
+      building['level'] = 'Silver'
     elif value > 0.85 and value <= 1.0:
-      performance['level'] = 'Gold'
+      building['level'] = 'Gold'
     else:
-      performance['level'] = 'Not eligible'
+      building['level'] = 'Not eligible'
 
-  filename = os.path.join(my_dir, 'data/performances.json')
+  filename = os.path.join(my_dir, 'data/buildings.json')
   os.makedirs(os.path.dirname(filename), exist_ok=True)
 
   with open(filename, 'w') as file:
-    json.dump(performances, file, indent=2, separators=(',', ': '))
+    json.dump(buildings_json_data, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
 
   return redirect(url_for('show', id= id))

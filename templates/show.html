@@ -49,12 +49,12 @@
       <p style="text-align: right;"><a href="/">Back to building list</a></p>
 
       {% if building.performance %}
-        <p>Performance: <span class="green-item">{{ (building.performance['value'] * 100)|round(2, 'ceil') }}</span></p>
-        <p>Level: <span class="green-item">{{ building.performance['level'] }}</span></p>
-        <p>ax: <span class="green-item">{{ (building.performance['ax'] * 100)|round(2, 'ceil') }}</span></p>
-        <p>bx: <span class="green-item">{{ (building.performance['bx'] * 100)|round(2, 'ceil') }}</span></p>
-        <p>cx: <span class="green-item">{{ (building.performance['cx'] * 100)|round(2, 'ceil') }}</span></p>
-        <p>dx: <span class="green-item">{{ (building.performance['dx'] * 100)|round(2, 'ceil') }}</span></p>
+        <p>Performance: <span class="green-item">{{ (building.performance * 100)|round(2, 'ceil') }}</span></p>
+        <p>Level: <span class="green-item">{{ building['level'] }}</span></p>
+        <p>ax: <span class="green-item">{{ (building['ax'] * 100)|round(2, 'ceil') }}</span></p>
+        <p>bx: <span class="green-item">{{ (building['bx'] * 100)|round(2, 'ceil') }}</span></p>
+        <p>cx: <span class="green-item">{{ (building['cx'] * 100)|round(2, 'ceil') }}</span></p>
+        <p>dx: <span class="green-item">{{ (building['dx'] * 100)|round(2, 'ceil') }}</span></p>
       {% else %}
         <p>Click below link to evaluate the building</p>
         <form method="POST" action="/buildings/{{ building['id'] }}/evaluate">
