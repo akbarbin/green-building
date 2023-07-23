@@ -184,7 +184,7 @@ def evaluate(id):
       total_ax += value
 
     # Saving ax into performances
-    performances.append({ "id": building['id'], "building_id": building['id'], "ax": total_ax })
+    performances.append({ "id": building['id'], "building_id": building['id'], "ax": round(total_ax, 4) })
 
   # bx
   bx_params = []
@@ -216,7 +216,7 @@ def evaluate(id):
       if bx_param['code'] == 'p73':
         point = calculate_p73(building[bx_param['code']])
 
-      value = point * bx_param['weight']
+      value = round(point * bx_param['weight'], 4)
 
       # Saving performance
       performance_items.append({ "building_id": building['id'], "code": bx_param['code'], "point": point, "weight": bx_param['weight'], "value": value })
@@ -226,7 +226,7 @@ def evaluate(id):
     # Saving bx into performances
     for item in performances:
       if item['building_id'] == building['id']:
-        item['bx'] = total_bx
+        item['bx'] = round(total_bx, 4)
 
   # cx
   cx_params = []
@@ -268,7 +268,7 @@ def evaluate(id):
     total_cx = 0
     for cx_param in cx_params:
       point = find_json_by_two_conditions(['code', 'building_id'], points, [cx_param['code'], building['id']])
-      value = point['value'] * cx_param['weight']
+      value = round(point['value'] * cx_param['weight'], 4)
 
       # Saving performance
       performance_items.append({ "building_id": building['id'], "code": cx_param['code'], "point": point['value'], "weight": cx_param['weight'], "value": value })
@@ -278,7 +278,7 @@ def evaluate(id):
     # Saving bx into performances
     for item in performances:
       if item['building_id'] == building['id']:
-        item['cx'] = total_cx
+        item['cx'] = round(total_cx, 4)
 
   # dx
   dx_params = []
@@ -315,7 +315,7 @@ def evaluate(id):
     total_dx = 0
     for dx_param in dx_params:
       point = find_json_by_two_conditions(['code', 'building_id'], points, [dx_param['code'], building['id']])
-      value = point['value'] * dx_param['weight']
+      value = round(point['value'] * dx_param['weight'], 4)
 
       # Saving performance
       performance_items.append({ "building_id": building['id'], "code": dx_param['code'], "point": point['value'], "weight": dx_param['weight'], "value": value })
@@ -325,7 +325,7 @@ def evaluate(id):
     # Saving bx into performances
     for item in performances:
       if item['building_id'] == building['id']:
-        item['dx'] = total_dx
+        item['dx'] = round(total_dx, 4)
 
   filename = os.path.join(my_dir, 'data/performance_items.json')
   os.makedirs(os.path.dirname(filename), exist_ok=True)
@@ -336,7 +336,7 @@ def evaluate(id):
 
   for performance in performances:
     value = performance['ax'] + performance['bx'] + performance['cx'] + performance['dx']
-    performance['value'] = value
+    performance['value'] = round(value, 4)
 
     # Adding level
     if value >= 0.45 and value <= 0.65:
