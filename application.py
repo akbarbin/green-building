@@ -277,6 +277,8 @@ def evaluate(id):
       # Saving performance
       performance_items.append({ "building_id": building['id'], "code": cx_param['code'], "point": point['value'], "weight": cx_param['weight'], "value": value })
 
+      total_cx += value
+
     # Saving bx into performances
     for item in performances:
       if item['building_id'] == building['id']:
