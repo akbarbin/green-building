@@ -232,7 +232,7 @@ def evaluate(id):
       value = round(point * bx_param['weight'], 4)
 
       # Saving performance
-      assessments.append({ "building_id": building['id'], "code": bx_param['code'], "point": point, "weight": bx_param['weight'], "value": value })
+      assessments.append({ "building_id": building['id'], "code": bx_param['code'], "point": round(point, 4), "weight": bx_param['weight'], "value": value })
 
       total_bx += value
 
