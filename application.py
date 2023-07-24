@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, Response
 from fuzzy_logic.p33 import calculate_p33
 from fuzzy_logic.p34 import calculate_p34
 from fuzzy_logic.p63 import calculate_p63
@@ -13,6 +13,43 @@ import os
 
 app = Flask(__name__)
 my_dir = os.path.dirname(__file__)
+
+@app.route('/api/assessments')
+def assessments():
+  try:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
+      buildings = json.load(file)
+  except FileNotFoundError:
+    buildings = []
+
+  try:
+    filename = os.path.join(my_dir, 'data/assessments.json')
+
+    with open(filename, 'r') as file:
+      assessments = json.load(file)
+  except FileNotFoundError:
+    assessments = []
+
+  try:
+    filename = os.path.join(my_dir, 'parameters.json')
+
+    with open(filename, 'r') as file:
+      parameters = json.load(file)
+  except FileNotFoundError:
+    parameters = []
+
+  for assessment in assessments:
+    building = find_json_by('id', buildings, assessment['building_id'])
+    parameter = find_json_by('code', parameters, assessment['code'])
+    assessment['building_level'] = building['level']
+    assessment['building_city'] = building['city']
+    assessment['parameter_group'] = parameter['group']
+    assessment['parameter_category'] = parameter['category']
+
+  json_data = json.dumps(assessments, indent=2, separators=(',', ': '))
+  return Response(response=json_data, status=200, content_type='application/json')
 
 @app.route('/')
 def index():
