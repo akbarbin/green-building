@@ -53,6 +53,10 @@ def assessments():
 
 @app.route('/')
 def index():
+  return render_template('index.html')
+
+@app.route('/buildings')
+def buildings():
   try:
     filename = os.path.join(my_dir, 'data/buildings.json')
 
@@ -61,7 +65,7 @@ def index():
   except FileNotFoundError:
     buildings = []
 
-  return render_template('index.html', buildings=buildings)
+  return render_template('buildings.html', buildings=buildings)
 
 @app.route('/buildings/new')
 def new():

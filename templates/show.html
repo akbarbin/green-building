@@ -1,13 +1,19 @@
+<!-- MVP.css quickstart template: https://github.com/andybrewer/mvp/ -->
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Building Detail</title>
+  <link rel="icon" href="https://via.placeholder.com/70x70">
+  <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+
+  <meta charset="utf-8">
+  <meta name="description" content="Green Building Assessment Detail">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Assessment Detail</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #207e5c;
-      margin: 0;
-      padding: 20px;
+    nav {
+      margin-bottom: 0;
     }
     .container {
       max-width: 500px;
@@ -17,168 +23,166 @@
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h1 {
-      text-align: center;
-    }
-    p {
-      font-size: 16px;
-    }
     .green-item {
       font-size: 18px;
       color: #45a049;
     }
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    input[type="submit"]:hover {
-      background-color: #45a049;
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="building-info">
-      <h1>{{ building['name'] }}</h1>
-      <p style="text-align: right;"><a href="/">Back to building list</a></p>
+  <header>
+    <nav>
+      <a href="/"><img alt="Logo" src="https://via.placeholder.com/200x70?text=DSM-GBRS" height="70"></a>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/buildings">Assessments</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <div class="container">
+      <div class="building-info">
+        <h1>Assessment Detail</h1>
+        <p style="text-align: right;"><a href="/">Back to building list</a></p>
 
-      {% if building.performance %}
-        <p>Performance: <span class="green-item">{{ (building.performance * 100)|round(2, 'ceil') }}</span></p>
-        <p>Level: <span class="green-item">{{ building['level'] }}</span></p>
-        <p>ax: <span class="green-item">{{ (building['ax'] * 100)|round(2, 'ceil') }}</span></p>
-        <p>bx: <span class="green-item">{{ (building['bx'] * 100)|round(2, 'ceil') }}</span></p>
-        <p>cx: <span class="green-item">{{ (building['cx'] * 100)|round(2, 'ceil') }}</span></p>
-        <p>dx: <span class="green-item">{{ (building['dx'] * 100)|round(2, 'ceil') }}</span></p>
-      {% else %}
-        <p>Click below link to evaluate the building</p>
-        <form method="POST" action="/buildings/{{ building['id'] }}/evaluate">
-          <input type="submit" value="Evaluate">
-        </form>
-      {% endif %}      
-      <br>
-      <p class="green-item">Detail</p>
-      <p>City: {{ building['city'] }}</p>
-      <br>
-      <p class="green-item">Policy</p>
-      <p>P01 - Public Transportation: {{ building['p01'] }}</p>
-      <p>P02 - Energy Management: {{ building['p02'] }}</p>
-      <p>P03 - Paint Material: {{ building['p03'] }}</p>
-      <p>P04 - Paper Material: {{ building['p04'] }}</p>
-      <p>P05 - Reusable Goods: {{ building['p05'] }}</p>
-      <p>P06 - Cleaning Material: {{ building['p06'] }}</p>
-      <p>P07 - Plastic Restriction: {{ building['p07'] }}</p>
-      <p>P08 - Water Saving: {{ building['p08'] }}</p>
-      <p>P09 - No Smoking Commitment: {{ building['p09'] }}</p>
-      <p>P10 - Waste Management: {{ building['p10'] }}</p>
-      <p>P11 - Water Waste Management: {{ building['p11'] }}</p>
-      <p>P12 - Expert Management: {{ building['p12'] }}</p>
-      <p>P13 - Retrofit Expert Certified: {{ building['p13'] }}</p>
-      <p>P14 - Maintenance Operation: {{ building['p14'] }}</p>
-      <p>P15 - As Built Drawing: {{ building['p15'] }}</p>
-      <p>P16 - Building Management Performance: {{ building['p16'] }}</p>
-      <p>P17 - Operational Log Book: {{ building['p17'] }}</p>
-      <p>P18 - Periodic Maintenance: {{ building['p18'] }}</p>
-      <p>P19 - Emergency Procedure: {{ building['p19'] }}</p>
-      <p>P20 - Maintenance Training: {{ building['p20'] }}</p>
-      <p>P21 - Excellent Service Training: {{ building['p21'] }}</p><br>
+        <p class="green-item">Detail</p>
+        <p>Name: {{ building['name'] }}</p>
+        <p>City: {{ building['city'] }}</p>
+        {% if building.performance %}
+          <p>Performance: <span class="green-item">{{ (building.performance * 100)|round(2, 'ceil') }}</span></p>
+          <p>Level: <span class="green-item">{{ building['level'] }}</span></p>
+          <p>ax: <span class="green-item">{{ (building['ax'] * 100)|round(2, 'ceil') }}</span></p>
+          <p>bx: <span class="green-item">{{ (building['bx'] * 100)|round(2, 'ceil') }}</span></p>
+          <p>cx: <span class="green-item">{{ (building['cx'] * 100)|round(2, 'ceil') }}</span></p>
+          <p>dx: <span class="green-item">{{ (building['dx'] * 100)|round(2, 'ceil') }}</span></p>
+        {% else %}
+          <p>Click below link to evaluate the building</p>
+          <form method="POST" action="/buildings/{{ building['id'] }}/evaluate">
+            <input type="submit" value="Evaluate">
+          </form>
+        {% endif %}
+        <br>
+        <p class="green-item">Policy</p>
+        <p>P01 - Public Transportation: {{ building['p01'] }}</p>
+        <p>P02 - Energy Management: {{ building['p02'] }}</p>
+        <p>P03 - Paint Material: {{ building['p03'] }}</p>
+        <p>P04 - Paper Material: {{ building['p04'] }}</p>
+        <p>P05 - Reusable Goods: {{ building['p05'] }}</p>
+        <p>P06 - Cleaning Material: {{ building['p06'] }}</p>
+        <p>P07 - Plastic Restriction: {{ building['p07'] }}</p>
+        <p>P08 - Water Saving: {{ building['p08'] }}</p>
+        <p>P09 - No Smoking Commitment: {{ building['p09'] }}</p>
+        <p>P10 - Waste Management: {{ building['p10'] }}</p>
+        <p>P11 - Water Waste Management: {{ building['p11'] }}</p>
+        <p>P12 - Expert Management: {{ building['p12'] }}</p>
+        <p>P13 - Retrofit Expert Certified: {{ building['p13'] }}</p>
+        <p>P14 - Maintenance Operation: {{ building['p14'] }}</p>
+        <p>P15 - As Built Drawing: {{ building['p15'] }}</p>
+        <p>P16 - Building Management Performance: {{ building['p16'] }}</p>
+        <p>P17 - Operational Log Book: {{ building['p17'] }}</p>
+        <p>P18 - Periodic Maintenance: {{ building['p18'] }}</p>
+        <p>P19 - Emergency Procedure: {{ building['p19'] }}</p>
+        <p>P20 - Maintenance Training: {{ building['p20'] }}</p>
+        <p>P21 - Excellent Service Training: {{ building['p21'] }}</p><br>
 
-      <p class="green-item">Retrofit</p>
-      <p>P22 - AC Arrangement: {{ building['p22'] }}</p>
-      <p>P23 - AC Standard: {{ building['p23'] }}</p>
-      <p>P24 - Swith Area Coverage: {{ building['p24'] }}</p>
-      <p>P25 - Electrical Load Grouping: {{ building['p25'] }}</p>
-      <p>P26 - Building Management System: {{ building['p26'] }}</p>
-      <p>P27 - Renewable Energy Source: {{ building['p27'] }}</p>
-      <p>P28 - Ground Water Meter: {{ building['p28'] }}</p>
-      <p>P29 - Saving Water Consumption: {{ building['p29'] }}</p>
-      <p>P30 - Water Fixture Planning: {{ building['p30'] }}</p>
-      <p>P31 - Free Smoke Commitmen: {{ building['p31'] }}</p>
-      <p>P32 - Separated Smoking Area: {{ building['p32'] }}</p>
-      <p>P33 - Ozone Depletion Potential: {{ building['p33'] }}</p>
-      <p>P34 - Global Warming Potential: {{ building['p34'] }}</p>
-      <p>P35 - Reduce Reuse Recycle Commitment: {{ building['p35'] }}</p>
-      <p>P36 - Rubbish Bin Provision: {{ building['p36'] }}</p>
-      <p>P37 - Temporay Garbage Place: {{ building['p37'] }}</p>
-      <p>P38 - Independent Waste Management: {{ building['p38'] }}</p>
-      <p>P39 - Waste Volume Recording: {{ building['p39'] }}</p><br>
+        <p class="green-item">Retrofit</p>
+        <p>P22 - AC Arrangement: {{ building['p22'] }}</p>
+        <p>P23 - AC Standard: {{ building['p23'] }}</p>
+        <p>P24 - Swith Area Coverage: {{ building['p24'] }}</p>
+        <p>P25 - Electrical Load Grouping: {{ building['p25'] }}</p>
+        <p>P26 - Building Management System: {{ building['p26'] }}</p>
+        <p>P27 - Renewable Energy Source: {{ building['p27'] }}</p>
+        <p>P28 - Ground Water Meter: {{ building['p28'] }}</p>
+        <p>P29 - Saving Water Consumption: {{ building['p29'] }}</p>
+        <p>P30 - Water Fixture Planning: {{ building['p30'] }}</p>
+        <p>P31 - Free Smoke Commitmen: {{ building['p31'] }}</p>
+        <p>P32 - Separated Smoking Area: {{ building['p32'] }}</p>
+        <p>P33 - Ozone Depletion Potential: {{ building['p33'] }}</p>
+        <p>P34 - Global Warming Potential: {{ building['p34'] }}</p>
+        <p>P35 - Reduce Reuse Recycle Commitment: {{ building['p35'] }}</p>
+        <p>P36 - Rubbish Bin Provision: {{ building['p36'] }}</p>
+        <p>P37 - Temporay Garbage Place: {{ building['p37'] }}</p>
+        <p>P38 - Independent Waste Management: {{ building['p38'] }}</p>
+        <p>P39 - Waste Volume Recording: {{ building['p39'] }}</p><br>
 
-      <p class="green-item">Construction</p>
-      <p>P40 - Initial Working Plan: {{ building['p40'] }}</p>
-      <p>P41 - Continuing Project Improvement: {{ building['p41'] }}</p>
-      <p>P42 - Data Integration Building: {{ building['p42'] }}</p>
-      <p>P43 - Innovate Green Construction: {{ building['p43'] }}</p>
-      <p>P44 - Innovate Green Operation: {{ building['p44'] }}</p>
-      <p>P45 - Fuel Efficiency: {{ building['p45'] }}</p>
-      <p>P46 - Construction Technology: {{ building['p46'] }}</p>
-      <p>P47 - Safety Material Construction: {{ building['p47'] }}</p>
-      <p>P48 - Initial Working Plan: {{ building['p48'] }}</p>
-      <p>P49 - Waste Sorting: {{ building['p49'] }}</p>
-      <p>P50 - Initial Working Plan: {{ building['p50'] }}</p>
-      <p>P51_1 - Waste Consumption of Last Month 1: {{ building['p51_1'] }}</p>
-      <p>P51_2 - Waste Consumption of Last Month 2: {{ building['p51_2'] }}</p>
-      <p>P51_3 - Waste Consumption of Last Month 3: {{ building['p51_3'] }}</p>
-      <p>P51_4 - Waste Consumption of Last Month 4: {{ building['p51_4'] }}</p>
-      <p>P51_5 - Waste Consumption of Last Month 5: {{ building['p51_5'] }}</p>
-      <p>P51_6 - Waste Consumption of Last Month 6: {{ building['p51_6'] }}</p>
-      <p>P52 - Waste Construction Principle: {{ building['p52'] }}</p>
-      <p>P53 - Copy Shop Drawing: {{ building['p53'] }}</p>
-      <p>P54 - Copy List Approval Material: {{ building['p54'] }}</p>
-      <p>P55 - Testing And Commission Report: {{ building['p55'] }}</p>
-      <p>P56 - System Tool Operation Report: {{ building['p56'] }}</p>
-      <p>P57 - Main Equipment Warranty: {{ building['p57'] }}</p>
-      <p>P58 - Manual Tools Documentation: {{ building['p58'] }}</p>
-      <p>P59 - Valid As Build Drawaing Report: {{ building['p59'] }}</p><br>
+        <p class="green-item">Construction</p>
+        <p>P40 - Initial Working Plan: {{ building['p40'] }}</p>
+        <p>P41 - Continuing Project Improvement: {{ building['p41'] }}</p>
+        <p>P42 - Data Integration Building: {{ building['p42'] }}</p>
+        <p>P43 - Innovate Green Construction: {{ building['p43'] }}</p>
+        <p>P44 - Innovate Green Operation: {{ building['p44'] }}</p>
+        <p>P45 - Fuel Efficiency: {{ building['p45'] }}</p>
+        <p>P46 - Construction Technology: {{ building['p46'] }}</p>
+        <p>P47 - Safety Material Construction: {{ building['p47'] }}</p>
+        <p>P48 - Initial Working Plan: {{ building['p48'] }}</p>
+        <p>P49 - Waste Sorting: {{ building['p49'] }}</p>
+        <p>P50 - Initial Working Plan: {{ building['p50'] }}</p>
+        <p>P51_1 - Waste Consumption of Last Month 1: {{ building['p51_1'] }}</p>
+        <p>P51_2 - Waste Consumption of Last Month 2: {{ building['p51_2'] }}</p>
+        <p>P51_3 - Waste Consumption of Last Month 3: {{ building['p51_3'] }}</p>
+        <p>P51_4 - Waste Consumption of Last Month 4: {{ building['p51_4'] }}</p>
+        <p>P51_5 - Waste Consumption of Last Month 5: {{ building['p51_5'] }}</p>
+        <p>P51_6 - Waste Consumption of Last Month 6: {{ building['p51_6'] }}</p>
+        <p>P52 - Waste Construction Principle: {{ building['p52'] }}</p>
+        <p>P53 - Copy Shop Drawing: {{ building['p53'] }}</p>
+        <p>P54 - Copy List Approval Material: {{ building['p54'] }}</p>
+        <p>P55 - Testing And Commission Report: {{ building['p55'] }}</p>
+        <p>P56 - System Tool Operation Report: {{ building['p56'] }}</p>
+        <p>P57 - Main Equipment Warranty: {{ building['p57'] }}</p>
+        <p>P58 - Manual Tools Documentation: {{ building['p58'] }}</p>
+        <p>P59 - Valid As Build Drawaing Report: {{ building['p59'] }}</p><br>
 
-      <p class="green-item">Utilization</p>
-      <p>P60 - Friendly Pest Material: {{ building['p60'] }}</p>
-      <p>P61_1 - Energy Consumption of Last Month 1: {{ building['p61_1'] }}</p>
-      <p>P61_2 - Energy Consumption of Last Month 2: {{ building['p61_2'] }}</p>
-      <p>P61_3 - Energy Consumption of Last Month 3: {{ building['p61_3'] }}</p>
-      <p>P61_4 - Energy Consumption of Last Month 4: {{ building['p61_4'] }}</p>
-      <p>P61_5 - Energy Consumption of Last Month 5: {{ building['p61_5'] }}</p>
-      <p>P61_6 - Energy Consumption of Last Month 6: {{ building['p61_6'] }}</p>
-      <p>P62 - Lift Maintenance Scheduling: {{ building['p62'] }}</p>
-      <p>P63 - Energy Usage Reference: {{ building['p63'] }}</p>
-      <p>P64 - Recommissioning: {{ building['p64'] }}</p>
-      <p>P65 - No Addition Ground Water Volume: {{ building['p65'] }}</p>
-      <p>P66 - Friendly Pest Material: {{ building['p66'] }}</p>
-      <p>p67_1 - Water Fixture Reference: {{ building['p67_1'] }}</p>
-      <p>P67_2 - Product Fixture Reality: {{ building['p67_2'] }}</p>
-      <p>P68_1 - Water Consumption of Last Month 1: {{ building['p68_1'] }}</p>
-      <p>P68_2 - Water Consumption of Last Month 2: {{ building['p68_2'] }}</p>
-      <p>P68_3 - Water Consumption of Last Month 3: {{ building['p68_3'] }}</p>
-      <p>P68_4 - Water Consumption of Last Month 4: {{ building['p68_4'] }}</p>
-      <p>P68_5 - Water Consumption of Last Month 5: {{ building['p68_5'] }}</p>
-      <p>P68_6 - Water Consumption of Last Month 6: {{ building['p68_6'] }}</p>
-      <p>P69 - Water Consumption Reference: {{ building['p69'] }}</p>
-      <p>P70 - Ground Water Percentage: {{ building['p70'] }}</p>
-      <p>P71 - Last Water Lab Month: {{ building['p71'] }}</p>
-      <p>P72 - Temperature: {{ building['p72'] }}</p>
-      <p>P73 - Humidity: {{ building['p73'] }}</p>
-      <p>P74 - No Smoking Warning: {{ building['p74'] }}</p>
-      <p>P75 - Waste Sorting: {{ building['p75'] }}</p>
-      <p>P76 - Rubbish Bin Provision: {{ building['p76'] }}</p>
-      <p>P77 - Temporary Garbage Dump: {{ building['p77'] }}</p>
-      <p>P78 - Full Waste Dump Checking: {{ building['p78'] }}</p>
-      <p>P79_1 - Waste Consumption of Last Month 1: {{ building['p79_1'] }}</p>
-      <p>P79_2 - Waste Consumption of Last Month 2: {{ building['p79_2'] }}</p>
-      <p>P79_3 - Waste Consumption of Last Month 3: {{ building['p79_3'] }}</p>
-      <p>P79_4 - Waste Consumption of Last Month 4: {{ building['p79_4'] }}</p>
-      <p>P79_5 - Waste Consumption of Last Month 5: {{ building['p79_5'] }}</p>
-      <p>P79_6 - Waste Consumption of Last Month 6: {{ building['p79_6'] }}</p>
-      <p>P80 - Recycled Water Lab: {{ building['p80'] }}</p>
-      <p>P81 - Green Building Socialization: {{ building['p81'] }}</p>
-      <p>P82 - Green Achivement Publication: {{ building['p82'] }}</p>
-      <p>P83 - Customer Satisfaction Survey: {{ building['p83'] }}</p><br>
+        <p class="green-item">Utilization</p>
+        <p>P60 - Friendly Pest Material: {{ building['p60'] }}</p>
+        <p>P61_1 - Energy Consumption of Last Month 1: {{ building['p61_1'] }}</p>
+        <p>P61_2 - Energy Consumption of Last Month 2: {{ building['p61_2'] }}</p>
+        <p>P61_3 - Energy Consumption of Last Month 3: {{ building['p61_3'] }}</p>
+        <p>P61_4 - Energy Consumption of Last Month 4: {{ building['p61_4'] }}</p>
+        <p>P61_5 - Energy Consumption of Last Month 5: {{ building['p61_5'] }}</p>
+        <p>P61_6 - Energy Consumption of Last Month 6: {{ building['p61_6'] }}</p>
+        <p>P62 - Lift Maintenance Scheduling: {{ building['p62'] }}</p>
+        <p>P63 - Energy Usage Reference: {{ building['p63'] }}</p>
+        <p>P64 - Recommissioning: {{ building['p64'] }}</p>
+        <p>P65 - No Addition Ground Water Volume: {{ building['p65'] }}</p>
+        <p>P66 - Friendly Pest Material: {{ building['p66'] }}</p>
+        <p>p67_1 - Water Fixture Reference: {{ building['p67_1'] }}</p>
+        <p>P67_2 - Product Fixture Reality: {{ building['p67_2'] }}</p>
+        <p>P68_1 - Water Consumption of Last Month 1: {{ building['p68_1'] }}</p>
+        <p>P68_2 - Water Consumption of Last Month 2: {{ building['p68_2'] }}</p>
+        <p>P68_3 - Water Consumption of Last Month 3: {{ building['p68_3'] }}</p>
+        <p>P68_4 - Water Consumption of Last Month 4: {{ building['p68_4'] }}</p>
+        <p>P68_5 - Water Consumption of Last Month 5: {{ building['p68_5'] }}</p>
+        <p>P68_6 - Water Consumption of Last Month 6: {{ building['p68_6'] }}</p>
+        <p>P69 - Water Consumption Reference: {{ building['p69'] }}</p>
+        <p>P70 - Ground Water Percentage: {{ building['p70'] }}</p>
+        <p>P71 - Last Water Lab Month: {{ building['p71'] }}</p>
+        <p>P72 - Temperature: {{ building['p72'] }}</p>
+        <p>P73 - Humidity: {{ building['p73'] }}</p>
+        <p>P74 - No Smoking Warning: {{ building['p74'] }}</p>
+        <p>P75 - Waste Sorting: {{ building['p75'] }}</p>
+        <p>P76 - Rubbish Bin Provision: {{ building['p76'] }}</p>
+        <p>P77 - Temporary Garbage Dump: {{ building['p77'] }}</p>
+        <p>P78 - Full Waste Dump Checking: {{ building['p78'] }}</p>
+        <p>P79_1 - Waste Consumption of Last Month 1: {{ building['p79_1'] }}</p>
+        <p>P79_2 - Waste Consumption of Last Month 2: {{ building['p79_2'] }}</p>
+        <p>P79_3 - Waste Consumption of Last Month 3: {{ building['p79_3'] }}</p>
+        <p>P79_4 - Waste Consumption of Last Month 4: {{ building['p79_4'] }}</p>
+        <p>P79_5 - Waste Consumption of Last Month 5: {{ building['p79_5'] }}</p>
+        <p>P79_6 - Waste Consumption of Last Month 6: {{ building['p79_6'] }}</p>
+        <p>P80 - Recycled Water Lab: {{ building['p80'] }}</p>
+        <p>P81 - Green Building Socialization: {{ building['p81'] }}</p>
+        <p>P82 - Green Achivement Publication: {{ building['p82'] }}</p>
+        <p>P83 - Customer Satisfaction Survey: {{ building['p83'] }}</p><br>
 
-      <a href="/">Back to building list</a>
+        <a href="/">Back to building list</a>
+      </div>
     </div>
-  </div>
+  </section>
+  <footer>
+    <hr>
+    <p>
+      <small>Code <a href="https://github.com/akbarbin/green-building" target="_blank">Github &nearr;</a><br></small>
+    </p>
+  </footer>
 </body>
 </html>

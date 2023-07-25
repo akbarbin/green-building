@@ -1,0 +1,75 @@
+<!-- MVP.css quickstart template: https://github.com/andybrewer/mvp/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" href="https://via.placeholder.com/70x70">
+  <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+
+  <meta charset="utf-8">
+  <meta name="description" content="Green Building Assessments">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Green Building Assessments</title>
+  <style>
+    nav {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/"><img alt="Logo" src="https://via.placeholder.com/200x70?text=DSM-GBRS" height="70"></a>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li>Assessments</li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <header>
+      <h2>Assessments List</h2>
+      <p>To evaluate building, please add new building and go to building detail.</p>
+      <p><a href="/buildings/new"><b>Let's evaluate your building &rarr;</b></a></p>
+    </header>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Performance</th>
+          <th>Level</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for building in buildings %}
+        <tr>
+          <td>{{ building.id }}</td>
+          <td>{{ building.name }}</td>
+          <td>{{ building.city }}</td>
+          {% if building.performance %}
+            <td>{{ (building.performance * 100)|round(2, 'ceil') }}</td>
+            <td>{{ building.level }}</td>
+          {% else %}
+            <td>-</td>
+            <td>-</td>
+          {% endif %}
+          <td><a href="/buildings/{{ building.id }}">Show</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  <footer>
+    <hr>
+    <p>
+      <small>Code <a href="https://github.com/akbarbin/green-building" target="_blank">Github &nearr;</a><br></small>
+    </p>
+  </footer>
+</body>
+</html>

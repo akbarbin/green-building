@@ -1,610 +1,589 @@
+<!-- MVP.css quickstart template: https://github.com/andybrewer/mvp/ -->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Green Building Assessment Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #207e5c;
-      margin: 0;
-      padding: 20px;
-    }
+    <link rel="icon" href="https://via.placeholder.com/70x70">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
 
-    h1 {
-      text-align: center;
-    }
+    <meta charset="utf-8">
+    <meta name="description" content="Green Building Assessment Form">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    form {
-      max-width: 400px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+    <title>Green Building Assessments</title>
+    <style>
+      nav {
+        margin-bottom: 0;
+      }
 
-    .sub-identitas {
-      font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    input[type="text"] {
-      width: 95%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      font-size: 16px;
-    }
-
-    input[type="radio"] {
-      margin-right: 5px;
-    }
-
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    input[type="submit"]:hover {
-      background-color: #45a049;
-    }
-  </style>
+      input {
+        border: 1px solid #ccc;
+      }
+    </style>
 </head>
+
 <body>
-  <h1>Green Building Assessment Form</h1>
-
-  <form method="POST" action="/buildings">
-    <div class="sub-identitas">Building</div>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" placeholder="Enter the building name" value="{{ building['name'] }}" required><br><br>
-
-    <label for="city">City:</label>
-    <input type="text" id="city" name="city" placeholder="Enter the building city"><br><br>
-
-    <div class="sub-identitas">Policy</div>
-    <label for="p01">P01 - Public Transportation:</label>
-    <input type="radio" id="p01_yes" name="p01" value="Yes" {% if building["p01"] == "Yes" %}checked{% endif %}>
-    <label for="p01_yes">Yes</label>
-    <input type="radio" id="p01_yes" name="p01" value="No" {% if building["p01"] == "No" %}checked{% endif %}>
-    <label for="p01_no">No</label><br><br>
-
-    <label for="p02">P02 - Energy Management:</label>
-    <input type="radio" id="p02_yes" name="p02" value="Yes" {% if building['p02'] == "Yes" %}checked{% endif %}>
-    <label for="p02_yes">Yes</label>
-    <input type="radio" id="p02_yes" name="p02" value="No" {% if building['p02'] == "No" %}checked{% endif %}>
-    <label for="p02_no">No</label><br><br>
-
-    <label for="p03">P03 - Paint Material:</label>
-    <input type="radio" id="p03_yes" name="p03" value="Yes" {% if building['p03'] == "Yes" %}checked{% endif %}>
-    <label for="p03_yes">Yes</label>
-    <input type="radio" id="p03_yes" name="p03" value="No" {% if building['p03'] == "No" %}checked{% endif %}>
-    <label for="p02_no">No</label><br><br>
-
-    <label for="p04">P04 - Paper Material:</label>
-    <input type="radio" id="p04_yes" name="p04" value="Yes" {% if building['p04'] == "Yes" %}checked{% endif %}>
-    <label for="p04_yes">Yes</label>
-    <input type="radio" id="p04_yes" name="p04" value="No" {% if building['p04'] == "No" %}checked{% endif %}>
-    <label for="p04_no">No</label><br><br>
-
-    <label for="p05">P05 - Reusable Goods:</label>
-    <input type="radio" id="p05_yes" name="p05" value="Yes" {% if building['p05'] == "Yes" %}checked{% endif %}>
-    <label for="p05_yes">Yes</label>
-    <input type="radio" id="p05_yes" name="p05" value="No" {% if building['p05'] == "No" %}checked{% endif %}>
-    <label for="p05_no">No</label><br><br>
-
-    <label for="p06">P06 - Cleaning Material:</label>
-    <input type="radio" id="p06_yes" name="p06" value="Yes" {% if building['p06'] == "Yes" %}checked{% endif %}>
-    <label for="p06_yes">Yes</label>
-    <input type="radio" id="p06_yes" name="p06" value="No" {% if building['p06'] == "No" %}checked{% endif %}>
-    <label for="p06_no">No</label><br><br>
-
-    <label for="p07">P07 - Plastic Restriction:</label>
-    <input type="radio" id="p07_yes" name="p07" value="Yes" {% if building['p07'] == "Yes" %}checked{% endif %}>
-    <label for="p07_yes">Yes</label>
-    <input type="radio" id="p07_yes" name="p07" value="No" {% if building['p07'] == "No" %}checked{% endif %}>
-    <label for="p07_no">No</label><br><br>
-
-    <label for="p08">P08 - Water Saving:</label>
-    <input type="radio" id="p08_yes" name="p08" value="Yes" {% if building['p08'] == "Yes" %}checked{% endif %}>
-    <label for="p08_yes">Yes</label>
-    <input type="radio" id="p08_yes" name="p08" value="No" {% if building['p08'] == "No" %}checked{% endif %}>
-    <label for="p08_no">No</label><br><br>
-
-    <label for="p09">P09 - No Smoking Commitment:</label>
-    <input type="radio" id="p09_yes" name="p09" value="Yes" {% if building['p09'] == "Yes" %}checked{% endif %}>
-    <label for="p09_yes">Yes</label>
-    <input type="radio" id="p09_yes" name="p09" value="No" {% if building['p09'] == "No" %}checked{% endif %}>
-    <label for="p09_no">No</label><br><br>
-
-    <label for="p10">P10 - Waste Management:</label>
-    <input type="radio" id="p10_yes" name="p10" value="Yes" {% if building['p10'] == "Yes" %}checked{% endif %}>
-    <label for="p10_yes">Yes</label>
-    <input type="radio" id="p10_yes" name="p10" value="No" {% if building['p10'] == "No" %}checked{% endif %}>
-    <label for="p10_no">No</label><br><br>
-
-    <label for="p11">P11 - Water Waste Management:</label>
-    <input type="radio" id="p11_yes" name="p11" value="Yes" {% if building['p11'] == "Yes" %}checked{% endif %}>
-    <label for="p11_yes">Yes</label>
-    <input type="radio" id="p11_yes" name="p11" value="No" {% if building['p11'] == "No" %}checked{% endif %}>
-    <label for="p11_no">No</label><br><br>
-
-    <label for="p12">P12 - Expert Management:</label>
-    <input type="radio" id="p12_yes" name="p12" value="Yes" {% if building['p12'] == "Yes" %}checked{% endif %}>
-    <label for="p12_yes">Yes</label>
-    <input type="radio" id="p12_yes" name="p12" value="No" {% if building['p12'] == "No" %}checked{% endif %}>
-    <label for="p12_no">No</label><br><br>
-
-    <label for="p13">P13 - Retrofit Expert Certified:</label>
-    <input type="radio" id="p13_yes" name="p13" value="Yes" {% if building['p13'] == "Yes" %}checked{% endif %}>
-    <label for="p13_yes">Yes</label>
-    <input type="radio" id="p13_yes" name="p13" value="No" {% if building['p13'] == "No" %}checked{% endif %}>
-    <label for="p13_no">No</label><br><br>
-
-    <label for="p14">P14 - Maintenance Operation:</label>
-    <input type="radio" id="p14_yes" name="p14" value="Yes" {% if building['p14'] == "Yes" %}checked{% endif %}>
-    <label for="p14_yes">Yes</label>
-    <input type="radio" id="p14_yes" name="p14" value="No" {% if building['p14'] == "No" %}checked{% endif %}>
-    <label for="p14_no">No</label><br><br>
-
-    <label for="p15">P15 - As Built Drawing:</label>
-    <input type="radio" id="p15_yes" name="p15" value="Yes" {% if building['p15'] == "Yes" %}checked{% endif %}>
-    <label for="p15_yes">Yes</label>
-    <input type="radio" id="p15_yes" name="p15" value="No" {% if building['p15'] == "No" %}checked{% endif %}>
-    <label for="p15_no">No</label><br><br>
-
-    <label for="p16">P16 - Building Management Performance:</label>
-    <input type="radio" id="p16_yes" name="p16" value="Yes" {% if building['p16'] == "Yes" %}checked{% endif %}>
-    <label for="p16_yes">Yes</label>
-    <input type="radio" id="p16_yes" name="p16" value="No" {% if building['p16'] == "No" %}checked{% endif %}>
-    <label for="p16_no">No</label><br><br>
-
-    <label for="p17">P17 - Operational Log Book:</label>
-    <input type="radio" id="p17_yes" name="p17" value="Yes" {% if building['p17'] == "Yes" %}checked{% endif %}>
-    <label for="p17_yes">Yes</label>
-    <input type="radio" id="p17_yes" name="p17" value="No" {% if building['p17'] == "No" %}checked{% endif %}>
-    <label for="p17_no">No</label><br><br>
-
-    <label for="p18">P18 - Periodic Maintenance:</label>
-    <input type="radio" id="p18_yes" name="p18" value="Yes" {% if building['p18'] == "Yes" %}checked{% endif %}>
-    <label for="p18_yes">Yes</label>
-    <input type="radio" id="p18_yes" name="p18" value="No" {% if building['p18'] == "No" %}checked{% endif %}>
-    <label for="p18_no">No</label><br><br>
-
-    <label for="p19">P19 - Emergency Procedure:</label>
-    <input type="radio" id="p19_yes" name="p19" value="Yes" {% if building['p19'] == "Yes" %}checked{% endif %}>
-    <label for="p19_yes">Yes</label>
-    <input type="radio" id="p19_yes" name="p19" value="No" {% if building['p19'] == "No" %}checked{% endif %}>
-    <label for="p19_no">No</label><br><br>
-
-    <label for="p20">P20 - Maintenance Training:</label>
-    <input type="radio" id="p20_yes" name="p20" value="Yes" {% if building['p20'] == "Yes" %}checked{% endif %}>
-    <label for="p20_yes">Yes</label>
-    <input type="radio" id="p20_yes" name="p20" value="No" {% if building['p20'] == "No" %}checked{% endif %}>
-    <label for="p20_no">No</label><br><br>
-
-    <label for="p21">P21 - Excellent Service Training:</label>
-    <input type="radio" id="p21_yes" name="p21" value="Yes" {% if building['p21'] == "Yes" %}checked{% endif %}>
-    <label for="p21_yes">Yes</label>
-    <input type="radio" id="p21_yes" name="p21" value="No" {% if building['p21'] == "No" %}checked{% endif %}>
-    <label for="p21_no">No</label><br><br>
-
-    <div class="sub-identitas">Retrofit</div>
-    <label for="p22">P22 - AC Arrangement:</label>
-    <input type="radio" id="p22_yes" name="p22" value="Yes" {% if building["p22"] == "Yes" %}checked{% endif %}>
-    <label for="p22_yes">Yes</label>
-    <input type="radio" id="p22_yes" name="p22" value="No" {% if building["p22"] == "No" %}checked{% endif %}>
-    <label for="p22_no">No</label><br><br>
-
-    <label for="p23">P23 - AC Standard:</label>
-    <input type="radio" id="p23_yes" name="p23" value="Yes" {% if building["p23"] == "Yes" %}checked{% endif %}>
-    <label for="p23_yes">Yes</label>
-    <input type="radio" id="p23_yes" name="p23" value="No" {% if building["p23"] == "No" %}checked{% endif %}>
-    <label for="p23_no">No</label><br><br>
-
-    <label for="p24">P24 - Swith Area Coverage:</label>
-    <input type="radio" id="p24_yes" name="p24" value="Yes" {% if building["p24"] == "Yes" %}checked{% endif %}>
-    <label for="p24_yes">Yes</label>
-    <input type="radio" id="p24_yes" name="p24" value="No" {% if building["p24"] == "No" %}checked{% endif %}>
-    <label for="p24_no">No</label><br><br>
-
-    <label for="p25">P25 - Electrical Load Grouping:</label>
-    <input type="radio" id="p25_yes" name="p25" value="Yes" {% if building["p25"] == "Yes" %}checked{% endif %}>
-    <label for="p25_yes">Yes</label>
-    <input type="radio" id="p25_yes" name="p25" value="No" {% if building["p25"] == "No" %}checked{% endif %}>
-    <label for="p25_no">No</label><br><br>
-
-    <label for="p26">P26 - Building Management System:</label>
-    <input type="radio" id="p26_yes" name="p26" value="Yes" {% if building["p26"] == "Yes" %}checked{% endif %}>
-    <label for="p26_yes">Yes</label>
-    <input type="radio" id="p26_yes" name="p26" value="No" {% if building["p26"] == "No" %}checked{% endif %}>
-    <label for="p26_no">No</label><br><br>
-
-    <label for="p27">P27 - Renewable Energy Source:</label>
-    <input type="radio" id="p27_yes" name="p27" value="Yes" {% if building["p27"] == "Yes" %}checked{% endif %}>
-    <label for="p27_yes">Yes</label>
-    <input type="radio" id="p27_yes" name="p27" value="No" {% if building["p27"] == "No" %}checked{% endif %}>
-    <label for="p27_no">No</label><br><br>
-
-    <label for="p28">P28 - Ground Water Meter:</label>
-    <input type="radio" id="p28_yes" name="p28" value="Yes" {% if building["p28"] == "Yes" %}checked{% endif %}>
-    <label for="p28_yes">Yes</label>
-    <input type="radio" id="p28_yes" name="p28" value="No" {% if building["p28"] == "No" %}checked{% endif %}>
-    <label for="p28_no">No</label><br><br>
-
-    <label for="p29">P29 - Saving Water Consumption:</label>
-    <input type="radio" id="p29_yes" name="p29" value="Yes" {% if building["p29"] == "Yes" %}checked{% endif %}>
-    <label for="p29_yes">Yes</label>
-    <input type="radio" id="p29_yes" name="p29" value="No" {% if building["p29"] == "No" %}checked{% endif %}>
-    <label for="p29_no">No</label><br><br>
-
-    <label for="p30">P30 - Water Fixture Planning:</label>
-    <input type="radio" id="p30_yes" name="p30" value="Yes" {% if building["p30"] == "Yes" %}checked{% endif %}>
-    <label for="p30_yes">Yes</label>
-    <input type="radio" id="p30_yes" name="p30" value="No" {% if building["p30"] == "No" %}checked{% endif %}>
-    <label for="p30_no">No</label><br><br>
-
-    <label for="p31">P31 - Free Smoke Commitmen:</label>
-    <input type="radio" id="p31_yes" name="p31" value="Yes" {% if building["p31"] == "Yes" %}checked{% endif %}>
-    <label for="p31_yes">Yes</label>
-    <input type="radio" id="p31_yes" name="p31" value="No" {% if building["p31"] == "No" %}checked{% endif %}>
-    <label for="p31_no">No</label><br><br>
-
-    <label for="p32">P32 - Separated Smoking Area:</label>
-    <input type="radio" id="p32_yes" name="p32" value="Yes" {% if building["p32"] == "Yes" %}checked{% endif %}>
-    <label for="p32_yes">Yes</label>
-    <input type="radio" id="p32_yes" name="p32" value="No" {% if building["p32"] == "No" %}checked{% endif %}>
-    <label for="p32_no">No</label><br><br>
-
-    <label for="p33">P33 - Ozone Depletion Potential:</label>
-    <input type="number" step="0.1" id="p33" name="p33" placeholder="Ozone Depletion Potential" value="{{ building['p33'] }}" required><br><br>
-
-    <label for="p34">P34 - Global Warming Potential:</label>
-    <input type="number" step="1" id="p34" name="p34" placeholder="Global Warming Potential" value="{{ building['p34'] }}" required><br><br>
-
-    <label for="p35">P35 - Reduce Reuse Recycle Commitment:</label>
-    <input type="radio" id="p35_yes" name="p35" value="Yes" {% if building["p35"] == "Yes" %}checked{% endif %}>
-    <label for="p35_yes">Yes</label>
-    <input type="radio" id="p35_yes" name="p35" value="No" {% if building["p35"] == "No" %}checked{% endif %}>
-    <label for="p35_no">No</label><br><br>
-
-    <label for="p36">P36 - Rubbish Bin Provision:</label>
-    <input type="radio" id="p36_yes" name="p36" value="Yes" {% if building["p36"] == "Yes" %}checked{% endif %}>
-    <label for="p36_yes">Yes</label>
-    <input type="radio" id="p36_yes" name="p36" value="No" {% if building["p36"] == "No" %}checked{% endif %}>
-    <label for="p36_no">No</label><br><br>
-
-    <label for="p37">P37 - Temporay Garbage Place:</label>
-    <input type="radio" id="p37_yes" name="p37" value="Yes" {% if building["p37"] == "Yes" %}checked{% endif %}>
-    <label for="p37_yes">Yes</label>
-    <input type="radio" id="p37_yes" name="p37" value="No" {% if building["p37"] == "No" %}checked{% endif %}>
-    <label for="p37_no">No</label><br><br>
-
-    <label for="p38">P38 - Independent Waste Management:</label>
-    <input type="radio" id="p38_yes" name="p38" value="Yes" {% if building["p38"] == "Yes" %}checked{% endif %}>
-    <label for="p38_yes">Yes</label>
-    <input type="radio" id="p38_yes" name="p38" value="No" {% if building["p38"] == "No" %}checked{% endif %}>
-    <label for="p38_no">No</label><br><br>
-
-    <label for="p39">P39 - Waste Volume Recording:</label>
-    <input type="radio" id="p39_yes" name="p39" value="Yes" {% if building["p39"] == "Yes" %}checked{% endif %}>
-    <label for="p39_yes">Yes</label>
-    <input type="radio" id="p39_yes" name="p39" value="No" {% if building["p39"] == "No" %}checked{% endif %}>
-    <label for="p39_no">No</label><br><br>
-
-    <div class="sub-identitas">Construction</div>
-    <label for="p40">P40 - Initial Working Plan:</label>
-    <input type="radio" id="p40_yes" name="p40" value="Yes" {% if building["p40"] == "Yes" %}checked{% endif %}>
-    <label for="p40_yes">Yes</label>
-    <input type="radio" id="p40_yes" name="p40" value="No" {% if building["p40"] == "No" %}checked{% endif %}>
-    <label for="p40_no">No</label><br><br>
-
-    <label for="p41">P41 - Continuing Project Improvement:</label>
-    <input type="radio" id="p41_yes" name="p41" value="Yes" {% if building["p41"] == "Yes" %}checked{% endif %}>
-    <label for="p41_yes">Yes</label>
-    <input type="radio" id="p41_yes" name="p41" value="No" {% if building["p41"] == "No" %}checked{% endif %}>
-    <label for="p41_no">No</label><br><br>
-
-    <label for="p42">P42 - Data Integration Building:</label>
-    <input type="radio" id="p42_yes" name="p42" value="Yes" {% if building["p42"] == "Yes" %}checked{% endif %}>
-    <label for="p42_yes">Yes</label>
-    <input type="radio" id="p42_yes" name="p42" value="No" {% if building["p42"] == "No" %}checked{% endif %}>
-    <label for="p42_no">No</label><br><br>
-
-    <label for="p43">P43 - Innovate Green Construction:</label>
-    <input type="radio" id="p43_yes" name="p43" value="Yes" {% if building["p43"] == "Yes" %}checked{% endif %}>
-    <label for="p43_yes">Yes</label>
-    <input type="radio" id="p43_yes" name="p43" value="No" {% if building["p43"] == "No" %}checked{% endif %}>
-    <label for="p43_no">No</label><br><br>
-
-    <label for="p44">P44 - Innovate Green Operation:</label>
-    <input type="radio" id="p44_yes" name="p44" value="Yes" {% if building["p44"] == "Yes" %}checked{% endif %}>
-    <label for="p44_yes">Yes</label>
-    <input type="radio" id="p44_yes" name="p44" value="No" {% if building["p44"] == "No" %}checked{% endif %}>
-    <label for="p44_no">No</label><br><br>
-
-    <label for="p45">P45 - Fuel Efficiency:</label>
-    <input type="radio" id="p45_yes" name="p45" value="Yes" {% if building["p45"] == "Yes" %}checked{% endif %}>
-    <label for="p45_yes">Yes</label>
-    <input type="radio" id="p45_yes" name="p45" value="No" {% if building["p45"] == "No" %}checked{% endif %}>
-    <label for="p45_no">No</label><br><br>
-
-    <label for="p46">P46 - Construction Technology:</label>
-    <input type="radio" id="p46_yes" name="p46" value="Yes" {% if building["p46"] == "Yes" %}checked{% endif %}>
-    <label for="p46_yes">Yes</label>
-    <input type="radio" id="p46_yes" name="p46" value="No" {% if building["p46"] == "No" %}checked{% endif %}>
-    <label for="p46_no">No</label><br><br>
-
-    <label for="p47">P47 - Safety Material Construction:</label>
-    <input type="radio" id="p47_yes" name="p47" value="Yes" {% if building["p47"] == "Yes" %}checked{% endif %}>
-    <label for="p47_yes">Yes</label>
-    <input type="radio" id="p47_yes" name="p47" value="No" {% if building["p47"] == "No" %}checked{% endif %}>
-    <label for="p47_no">No</label><br><br>
-
-    <label for="p48">P48 - Initial Working Plan:</label>
-    <input type="radio" id="p48_yes" name="p48" value="Yes" {% if building["p48"] == "Yes" %}checked{% endif %}>
-    <label for="p48_yes">Yes</label>
-    <input type="radio" id="p48_yes" name="p48" value="No" {% if building["p48"] == "No" %}checked{% endif %}>
-    <label for="p48_no">No</label><br><br>
-
-    <label for="p49">P49 - Waste Sorting:</label>
-    <input type="radio" id="p49_yes" name="p49" value="Yes" {% if building["p49"] == "Yes" %}checked{% endif %}>
-    <label for="p49_yes">Yes</label>
-    <input type="radio" id="p49_yes" name="p49" value="No" {% if building["p49"] == "No" %}checked{% endif %}>
-    <label for="p49_no">No</label><br><br>
-    
-    <label for="p50">P50 - Initial Working Plan:</label>
-    <input type="radio" id="p50_yes" name="p50" value="Yes" {% if building["p50"] == "Yes" %}checked{% endif %}>
-    <label for="p50_yes">Yes</label>
-    <input type="radio" id="p50_yes" name="p50" value="No" {% if building["p50"] == "No" %}checked{% endif %}>
-    <label for="p50_no">No</label><br><br>
-
-    <label for="p51_1">P51_1 - Waste Consumption of Last Month 1:</label>
-    <input type="number" step="0.1" id="p51_1" name="p51_1" placeholder="Waste Consumption of Last Month 1 (Rupiah)" value="{{ building['p51_1'] }}" required><br><br>
-
-    <label for="p51_2">P51_2 - Waste Consumption of Last Month 2:</label>
-    <input type="number" step="0.1" id="p51_2" name="p51_2" placeholder="Waste Consumption of Last Month 2 (Rupiah)" value="{{ building['p51_2'] }}" required><br><br>
-
-    <label for="p51_3">P51_3 - Waste Consumption of Last Month 3:</label>
-    <input type="number" step="0.1" id="p51_3" name="p51_3" placeholder="Waste Consumption of Last Month 3 (Rupiah)" value="{{ building['p51_3'] }}" required><br><br>
-
-    <label for="p51_4">P51_4 - Waste Consumption of Last Month 4:</label>
-    <input type="number" step="0.1" id="p51_4" name="p51_4" placeholder="Waste Consumption of Last Month 4 (Rupiah)" value="{{ building['p51_4'] }}" required><br><br>
-
-    <label for="p51_5">P51_5 - Waste Consumption of Last Month 5:</label>
-    <input type="number" step="0.1" id="p51_5" name="p51_5" placeholder="Waste Consumption of Last Month 5 (Rupiah)" value="{{ building['p51_5'] }}" required><br><br>
-
-    <label for="p51_6">P51_6 - Waste Consumption of Last Month 6:</label>
-    <input type="number" step="0.1" id="p51_6" name="p51_6" placeholder="Waste Consumption of Last Month 6 (Rupiah)" value="{{ building['p51_6'] }}" required><br><br>
-
-    <label for="p52">P52 - Waste Construction Principle:</label>
-    <input type="radio" id="p52_yes" name="p52" value="Yes" {% if building["p52"] == "Yes" %}checked{% endif %}>
-    <label for="p52_yes">Yes</label>
-    <input type="radio" id="p52_yes" name="p52" value="No" {% if building["p52"] == "No" %}checked{% endif %}>
-    <label for="p52_no">No</label><br><br>
-
-    <label for="p53">P53 - Copy Shop Drawing:</label>
-    <input type="radio" id="p53_yes" name="p53" value="Yes" {% if building["p53"] == "Yes" %}checked{% endif %}>
-    <label for="p53_yes">Yes</label>
-    <input type="radio" id="p53_yes" name="p53" value="No" {% if building["p53"] == "No" %}checked{% endif %}>
-    <label for="p53_no">No</label><br><br>
-
-    <label for="p54">P54 - Copy List Approval Material:</label>
-    <input type="radio" id="p54_yes" name="p54" value="Yes" {% if building["p54"] == "Yes" %}checked{% endif %}>
-    <label for="p54_yes">Yes</label>
-    <input type="radio" id="p54_yes" name="p54" value="No" {% if building["p54"] == "No" %}checked{% endif %}>
-    <label for="p54_no">No</label><br><br>
-
-    <label for="p55">P55 - Testing And Commission Report:</label>
-    <input type="radio" id="p55_yes" name="p55" value="Yes" {% if building["p55"] == "Yes" %}checked{% endif %}>
-    <label for="p55_yes">Yes</label>
-    <input type="radio" id="p55_yes" name="p55" value="No" {% if building["p55"] == "No" %}checked{% endif %}>
-    <label for="p55_no">No</label><br><br>
-
-    <label for="p56">P56 - System Tool Operation Report:</label>
-    <input type="radio" id="p56_yes" name="p56" value="Yes" {% if building["p56"] == "Yes" %}checked{% endif %}>
-    <label for="p56_yes">Yes</label>
-    <input type="radio" id="p56_yes" name="p56" value="No" {% if building["p56"] == "No" %}checked{% endif %}>
-    <label for="p56_no">No</label><br><br>
-
-    <label for="p57">P57 - Main Equipment Warranty:</label>
-    <input type="radio" id="p57_yes" name="p57" value="Yes" {% if building["p57"] == "Yes" %}checked{% endif %}>
-    <label for="p57_yes">Yes</label>
-    <input type="radio" id="p57_yes" name="p57" value="No" {% if building["p57"] == "No" %}checked{% endif %}>
-    <label for="p57_no">No</label><br><br>
-
-    <label for="p58">P58 - Manual Tools Documentation:</label>
-    <input type="radio" id="p58_yes" name="p58" value="Yes" {% if building["p58"] == "Yes" %}checked{% endif %}>
-    <label for="p58_yes">Yes</label>
-    <input type="radio" id="p58_yes" name="p58" value="No" {% if building["p58"] == "No" %}checked{% endif %}>
-    <label for="p58_no">No</label><br><br>
-
-    <label for="p59">P59 - Valid As Build Drawaing Report:</label>
-    <input type="radio" id="p59_yes" name="p59" value="Yes" {% if building["p59"] == "Yes" %}checked{% endif %}>
-    <label for="p59_yes">Yes</label>
-    <input type="radio" id="p59_yes" name="p59" value="No" {% if building["p59"] == "No" %}checked{% endif %}>
-    <label for="p59_no">No</label><br><br>
-
-    <div class="sub-identitas">Utilization</div>
-    <label for="p60">P60 - Friendly Pest Material:</label>
-    <input type="radio" id="p60_yes" name="p60" value="Yes" {% if building["p60"] == "Yes" %}checked{% endif %}>
-    <label for="p60_yes">Yes</label>
-    <input type="radio" id="p60_yes" name="p60" value="No" {% if building["p60"] == "No" %}checked{% endif %}>
-    <label for="p60_no">No</label><br><br>
-
-    <label for="p61_1">P61_1 - Energy Consumption of Last Month 1:</label>
-    <input type="number" step="0.1" id="p61_1" name="p61_1" placeholder="Energy Consumption of Last Month 1 (Rupiah)" value="{{ building['p61_1'] }}" required><br><br>
-
-    <label for="p61_2">P61_2 - Energy Consumption of Last Month 2:</label>
-    <input type="number" step="0.1" id="p61_2" name="p61_2" placeholder="Energy Consumption of Last Month 2 (Rupiah)" value="{{ building['p61_2'] }}" required><br><br>
-
-    <label for="p61_3">P61_3 - Energy Consumption of Last Month 3:</label>
-    <input type="number" step="0.1" id="p61_3" name="p61_3" placeholder="Energy Consumption of Last Month 3 (Rupiah)" value="{{ building['p61_3'] }}" required><br><br>
-
-    <label for="p61_4">P61_4 - Energy Consumption of Last Month 4:</label>
-    <input type="number" step="0.1" id="p61_4" name="p61_4" placeholder="Energy Consumption of Last Month 4 (Rupiah)" value="{{ building['p61_4'] }}" required><br><br>
-
-    <label for="p61_5">P61_5 - Energy Consumption of Last Month 5:</label>
-    <input type="number" step="0.1" id="p61_5" name="p61_5" placeholder="Energy Consumption of Last Month 5 (Rupiah)" value="{{ building['p61_5'] }}" required><br><br>
-
-    <label for="p61_6">P61_6 - Energy Consumption of Last Month 6:</label>
-    <input type="number" step="0.1" id="p61_6" name="p61_6" placeholder="Energy Consumption of Last Month 6 (Rupiah)" value="{{ building['p61_6'] }}" required><br><br>
-
-    <label for="p62">P62 - Lift Maintenance Scheduling:</label>
-    <input type="radio" id="p62_yes" name="p62" value="Yes" {% if building["p62"] == "Yes" %}checked{% endif %}>
-    <label for="p62_yes">Yes</label>
-    <input type="radio" id="p62_yes" name="p62" value="No" {% if building["p62"] == "No" %}checked{% endif %}>
-    <label for="p62_no">No</label><br><br>
-
-    <label for="p63">P63 - Energy Usage Reference:</label>
-    <input type="text" id="p63" name="p63" placeholder="Energy Usage Reference (Rupiah)" value="{{ building['p63'] }}" required><br><br>
-
-    <label for="p64">P64 - Recommissioning:</label>
-    <input type="radio" id="p64_yes" name="p64" value="Yes" {% if building["p64"] == "Yes" %}checked{% endif %}>
-    <label for="p64_yes">Yes</label>
-    <input type="radio" id="p64_yes" name="p64" value="No" {% if building["p64"] == "No" %}checked{% endif %}>
-    <label for="p64_no">No</label><br><br>
-
-    <label for="p65">P65 - No Addition Ground Water Volume:</label>
-    <input type="radio" id="p65_yes" name="p65" value="Yes" {% if building["p65"] == "Yes" %}checked{% endif %}>
-    <label for="p65_yes">Yes</label>
-    <input type="radio" id="p65_yes" name="p65" value="No" {% if building["p65"] == "No" %}checked{% endif %}>
-    <label for="p65_no">No</label><br><br>
-
-    <label for="p66">P66 - Friendly Pest Material:</label>
-    <input type="radio" id="p66_yes" name="p66" value="Yes" {% if building["p66"] == "Yes" %}checked{% endif %}>
-    <label for="p66_yes">Yes</label>
-    <input type="radio" id="p66_yes" name="p66" value="No" {% if building["p66"] == "No" %}checked{% endif %}>
-    <label for="p66_no">No</label><br><br>
-
-    <label for="p67_1">p67_1 - Water Fixture Reference:</label>
-    <input type="number" step="0.1" id="p67_1" name="p67_1" placeholder="Water Fixture Reference (unit)" value="{{ building['p67_1'] }}" required><br><br>
-
-    <label for="p67_2">P67_2 - Product Fixture Reality:</label>
-    <input type="number" step="0.1" id="p67_2" name="p67_2" placeholder="Product Fixture Reality (unit)" value="{{ building['p67_2'] }}" required><br><br>
-
-    <label for="p68_1">P68_1 - Water Consumption of Last Month 1:</label>
-    <input type="number" step="0.1" id="p68_1" name="p68_1" placeholder="Water Consumption of Last Month 1 (Rupiah)" value="{{ building['p68_1'] }}" required><br><br>
-
-    <label for="p68_2">P68_2 - Water Consumption of Last Month 2:</label>
-    <input type="number" step="0.1" id="p68_2" name="p68_2" placeholder="Water Consumption of Last Month 2 (Rupiah)" value="{{ building['p68_2'] }}" required><br><br>
-
-    <label for="p68_3">P68_3 - Water Consumption of Last Month 3:</label>
-    <input type="number" step="0.1" id="p68_3" name="p68_3" placeholder="Water Consumption of Last Month 3 (Rupiah)" value="{{ building['p68_3'] }}" required><br><br>
-
-    <label for="p68_4">P68_4 - Water Consumption of Last Month 4:</label>
-    <input type="number" step="0.1" id="p68_4" name="p68_4" placeholder="Water Consumption of Last Month 4 (Rupiah)" value="{{ building['p68_4'] }}" required><br><br>
-
-    <label for="p68_5">P68_5 - Water Consumption of Last Month 5:</label>
-    <input type="number" step="0.1" id="p68_5" name="p68_5" placeholder="Water Consumption of Last Month 5 (Rupiah)" value="{{ building['p68_5'] }}" required><br><br>
-
-    <label for="p68_6">P68_6 - Water Consumption of Last Month 6:</label>
-    <input type="number" step="0.1" id="p68_6" name="p68_6" placeholder="Water Consumption of Last Month 6 (Rupiah)" value="{{ building['p68_6'] }}" required><br><br>
-
-    <label for="p69">P69 - Water Consumption Reference:</label>
-    <input type="text" id="p69" name="p69" placeholder="Water Consumption Reference (Rupiah)" value="{{ building['p69'] }}" required><br><br>
-
-    <label for="p70">P70 - Ground Water Percentage:</label>
-    <input type="radio" id="p70_yes" name="p70" value="Yes" {% if building["p70"] == "Yes" %}checked{% endif %}>
-    <label for="p70_yes">Yes</label>
-    <input type="radio" id="p70_yes" name="p70" value="No" {% if building["p70"] == "No" %}checked{% endif %}>
-    <label for="p70_no">No</label><br><br>
-
-    <label for="p71">P71 - Last Water Lab Month:</label>
-    <input type="date" id="p71" name="p71" placeholder="Last Water Lab Month (Date)" value="{{ building['p71'] }}" required><br><br>
-
-    <label for="p72">P72 - Temperature:</label>
-    <input type="number" step="0.1" id="p72" name="p72" placeholder="Temperature (Celcius)" value="{{ building['p72'] }}" required><br><br>
-
-    <label for="p73">P73 - Humidity:</label>
-    <input type="number" step="0.1" id="p73" name="p73" placeholder="Humidity (%)" value="{{ building['p73'] }}" required><br><br>
-
-    <label for="p74">P74 - No Smoking Warning:</label>
-    <input type="radio" id="p74_yes" name="p74" value="Yes" {% if building["p74"] == "Yes" %}checked{% endif %}>
-    <label for="p74_yes">Yes</label>
-    <input type="radio" id="p74_yes" name="p74" value="No" {% if building["p74"] == "No" %}checked{% endif %}>
-    <label for="p74_no">No</label><br><br>
-
-    <label for="p75">P75 - Waste Sorting:</label>
-    <input type="radio" id="p75_yes" name="p75" value="Yes" {% if building["p75"] == "Yes" %}checked{% endif %}>
-    <label for="p75_yes">Yes</label>
-    <input type="radio" id="p75_yes" name="p75" value="No" {% if building["p75"] == "No" %}checked{% endif %}>
-    <label for="p75_no">No</label><br><br>
-
-    <label for="p76">P76 - Rubbish Bin Provision:</label>
-    <input type="radio" id="p76_yes" name="p76" value="Yes" {% if building["p76"] == "Yes" %}checked{% endif %}>
-    <label for="p76_yes">Yes</label>
-    <input type="radio" id="p76_yes" name="p76" value="No" {% if building["p76"] == "No" %}checked{% endif %}>
-    <label for="p76_no">No</label><br><br>
-
-    <label for="p77">P77 - Temporary Garbage Dump:</label>
-    <input type="radio" id="p77_yes" name="p77" value="Yes" {% if building["p77"] == "Yes" %}checked{% endif %}>
-    <label for="p77_yes">Yes</label>
-    <input type="radio" id="p77_yes" name="p77" value="No" {% if building["p77"] == "No" %}checked{% endif %}>
-    <label for="p77_no">No</label><br><br>
-
-    <label for="p78">P78 - Full Waste Dump Checking:</label>
-    <input type="radio" id="p78_yes" name="p78" value="Yes" {% if building["p78"] == "Yes" %}checked{% endif %}>
-    <label for="p78_yes">Yes</label>
-    <input type="radio" id="p78_yes" name="p78" value="No" {% if building["p78"] == "No" %}checked{% endif %}>
-    <label for="p78_no">No</label><br><br>
-
-    <label for="p79_1">P79_1 - Waste Consumption of Last Month 1:</label>
-    <input type="number" step="0.1" id="p79_1" name="p79_1" placeholder="Waste Consumption of Last Month 1 (m3)" value="{{ building['p79_1'] }}" required><br><br>
-
-    <label for="p79_2">P79_2 - Waste Consumption of Last Month 2:</label>
-    <input type="number" step="0.1" id="p79_2" name="p79_2" placeholder="Waste Consumption of Last Month 2 (m3)" value="{{ building['p79_2'] }}" required><br><br>
-
-    <label for="p79_3">P79_3 - Waste Consumption of Last Month 3:</label>
-    <input type="number" step="0.1" id="p79_3" name="p79_3" placeholder="Waste Consumption of Last Month 3 (m3)" value="{{ building['p79_3'] }}" required><br><br>
-
-    <label for="p79_4">P79_4 - Waste Consumption of Last Month 4:</label>
-    <input type="number" step="0.1" id="p79_4" name="p79_4" placeholder="Waste Consumption of Last Month 4 (m3)" value="{{ building['p79_4'] }}" required><br><br>
-
-    <label for="p79_5">P79_5 - Waste Consumption of Last Month 5:</label>
-    <input type="number" step="0.1" id="p79_5" name="p79_5" placeholder="Waste Consumption of Last Month 5 (m3)" value="{{ building['p79_5'] }}" required><br><br>
-
-    <label for="p79_6">P79_6 - Waste Consumption of Last Month 6:</label>
-    <input type="number" step="0.1" id="p79_6" name="p79_6" placeholder="Waste Consumption of Last Month 6 (m3)" value="{{ building['p79_6'] }}" required><br><br>
-
-    <label for="p80">P80 - Recycled Water Lab:</label>
-    <input type="radio" id="p80_yes" name="p80" value="Yes" {% if building["p80"] == "Yes" %}checked{% endif %}>
-    <label for="p80_yes">Yes</label>
-    <input type="radio" id="p80_yes" name="p80" value="No" {% if building["p80"] == "No" %}checked{% endif %}>
-    <label for="p80_no">No</label><br><br>
-
-    <label for="p81">P81 - Green Building Socialization:</label>
-    <input type="radio" id="p81_yes" name="p81" value="Yes" {% if building["p81"] == "Yes" %}checked{% endif %}>
-    <label for="p81_yes">Yes</label>
-    <input type="radio" id="p81_yes" name="p81" value="No" {% if building["p81"] == "No" %}checked{% endif %}>
-    <label for="p81_no">No</label><br><br>
-
-    <label for="p82">P82 - Green Achivement Publication:</label>
-    <input type="radio" id="p82_yes" name="p82" value="Yes" {% if building["p82"] == "Yes" %}checked{% endif %}>
-    <label for="p82_yes">Yes</label>
-    <input type="radio" id="p82_yes" name="p82" value="No" {% if building["p82"] == "No" %}checked{% endif %}>
-    <label for="p82_no">No</label><br><br>
-
-    <label for="p83">P83 - Customer Satisfaction Survey:</label>
-    <input type="radio" id="p83_yes" name="p83" value="Yes" {% if building["p83"] == "Yes" %}checked{% endif %}>
-    <label for="p83_yes">Yes</label>
-    <input type="radio" id="p83_yes" name="p83" value="No" {% if building["p83"] == "No" %}checked{% endif %}>
-    <label for="p83_no">No</label><br><br>
-
-    <input type="submit" value="Submit">
-  </form>
-
+  <header>
+    <nav>
+        <a href="/"><img alt="Logo" src="https://via.placeholder.com/200x70?text=DSM-GBRS" height="70"></a>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/buildings">Assessments</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <section>
+    <header>
+      <h2>Green Building Assessment Form</h2>
+    </header>
+
+    <form method="POST" action="/buildings">
+      <div class="sub-identitas">Building</div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter the building name" value="{{ building['name'] }}" required>
+
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" placeholder="Enter the building city">
+
+      <div class="sub-identitas">Policy</div>
+      <label for="p01">P01 - Public Transportation:</label>
+      <input type="radio" id="p01_yes" name="p01" value="Yes" {% if building["p01"] == "Yes" %}checked{% endif %}>
+      <label for="p01_yes">Yes</label>
+      <input type="radio" id="p01_yes" name="p01" value="No" {% if building["p01"] == "No" %}checked{% endif %}>
+      <label for="p01_no">No</label>
+
+      <label for="p02">P02 - Energy Management:</label>
+      <input type="radio" id="p02_yes" name="p02" value="Yes" {% if building['p02'] == "Yes" %}checked{% endif %}>
+      <label for="p02_yes">Yes</label>
+      <input type="radio" id="p02_yes" name="p02" value="No" {% if building['p02'] == "No" %}checked{% endif %}>
+      <label for="p02_no">No</label>
+
+      <label for="p03">P03 - Paint Material:</label>
+      <input type="radio" id="p03_yes" name="p03" value="Yes" {% if building['p03'] == "Yes" %}checked{% endif %}>
+      <label for="p03_yes">Yes</label>
+      <input type="radio" id="p03_yes" name="p03" value="No" {% if building['p03'] == "No" %}checked{% endif %}>
+      <label for="p02_no">No</label>
+
+      <label for="p04">P04 - Paper Material:</label>
+      <input type="radio" id="p04_yes" name="p04" value="Yes" {% if building['p04'] == "Yes" %}checked{% endif %}>
+      <label for="p04_yes">Yes</label>
+      <input type="radio" id="p04_yes" name="p04" value="No" {% if building['p04'] == "No" %}checked{% endif %}>
+      <label for="p04_no">No</label>
+
+      <label for="p05">P05 - Reusable Goods:</label>
+      <input type="radio" id="p05_yes" name="p05" value="Yes" {% if building['p05'] == "Yes" %}checked{% endif %}>
+      <label for="p05_yes">Yes</label>
+      <input type="radio" id="p05_yes" name="p05" value="No" {% if building['p05'] == "No" %}checked{% endif %}>
+      <label for="p05_no">No</label>
+
+      <label for="p06">P06 - Cleaning Material:</label>
+      <input type="radio" id="p06_yes" name="p06" value="Yes" {% if building['p06'] == "Yes" %}checked{% endif %}>
+      <label for="p06_yes">Yes</label>
+      <input type="radio" id="p06_yes" name="p06" value="No" {% if building['p06'] == "No" %}checked{% endif %}>
+      <label for="p06_no">No</label>
+
+      <label for="p07">P07 - Plastic Restriction:</label>
+      <input type="radio" id="p07_yes" name="p07" value="Yes" {% if building['p07'] == "Yes" %}checked{% endif %}>
+      <label for="p07_yes">Yes</label>
+      <input type="radio" id="p07_yes" name="p07" value="No" {% if building['p07'] == "No" %}checked{% endif %}>
+      <label for="p07_no">No</label>
+
+      <label for="p08">P08 - Water Saving:</label>
+      <input type="radio" id="p08_yes" name="p08" value="Yes" {% if building['p08'] == "Yes" %}checked{% endif %}>
+      <label for="p08_yes">Yes</label>
+      <input type="radio" id="p08_yes" name="p08" value="No" {% if building['p08'] == "No" %}checked{% endif %}>
+      <label for="p08_no">No</label>
+
+      <label for="p09">P09 - No Smoking Commitment:</label>
+      <input type="radio" id="p09_yes" name="p09" value="Yes" {% if building['p09'] == "Yes" %}checked{% endif %}>
+      <label for="p09_yes">Yes</label>
+      <input type="radio" id="p09_yes" name="p09" value="No" {% if building['p09'] == "No" %}checked{% endif %}>
+      <label for="p09_no">No</label>
+
+      <label for="p10">P10 - Waste Management:</label>
+      <input type="radio" id="p10_yes" name="p10" value="Yes" {% if building['p10'] == "Yes" %}checked{% endif %}>
+      <label for="p10_yes">Yes</label>
+      <input type="radio" id="p10_yes" name="p10" value="No" {% if building['p10'] == "No" %}checked{% endif %}>
+      <label for="p10_no">No</label>
+
+      <label for="p11">P11 - Water Waste Management:</label>
+      <input type="radio" id="p11_yes" name="p11" value="Yes" {% if building['p11'] == "Yes" %}checked{% endif %}>
+      <label for="p11_yes">Yes</label>
+      <input type="radio" id="p11_yes" name="p11" value="No" {% if building['p11'] == "No" %}checked{% endif %}>
+      <label for="p11_no">No</label>
+
+      <label for="p12">P12 - Expert Management:</label>
+      <input type="radio" id="p12_yes" name="p12" value="Yes" {% if building['p12'] == "Yes" %}checked{% endif %}>
+      <label for="p12_yes">Yes</label>
+      <input type="radio" id="p12_yes" name="p12" value="No" {% if building['p12'] == "No" %}checked{% endif %}>
+      <label for="p12_no">No</label>
+
+      <label for="p13">P13 - Retrofit Expert Certified:</label>
+      <input type="radio" id="p13_yes" name="p13" value="Yes" {% if building['p13'] == "Yes" %}checked{% endif %}>
+      <label for="p13_yes">Yes</label>
+      <input type="radio" id="p13_yes" name="p13" value="No" {% if building['p13'] == "No" %}checked{% endif %}>
+      <label for="p13_no">No</label>
+
+      <label for="p14">P14 - Maintenance Operation:</label>
+      <input type="radio" id="p14_yes" name="p14" value="Yes" {% if building['p14'] == "Yes" %}checked{% endif %}>
+      <label for="p14_yes">Yes</label>
+      <input type="radio" id="p14_yes" name="p14" value="No" {% if building['p14'] == "No" %}checked{% endif %}>
+      <label for="p14_no">No</label>
+
+      <label for="p15">P15 - As Built Drawing:</label>
+      <input type="radio" id="p15_yes" name="p15" value="Yes" {% if building['p15'] == "Yes" %}checked{% endif %}>
+      <label for="p15_yes">Yes</label>
+      <input type="radio" id="p15_yes" name="p15" value="No" {% if building['p15'] == "No" %}checked{% endif %}>
+      <label for="p15_no">No</label>
+
+      <label for="p16">P16 - Building Management Performance:</label>
+      <input type="radio" id="p16_yes" name="p16" value="Yes" {% if building['p16'] == "Yes" %}checked{% endif %}>
+      <label for="p16_yes">Yes</label>
+      <input type="radio" id="p16_yes" name="p16" value="No" {% if building['p16'] == "No" %}checked{% endif %}>
+      <label for="p16_no">No</label>
+
+      <label for="p17">P17 - Operational Log Book:</label>
+      <input type="radio" id="p17_yes" name="p17" value="Yes" {% if building['p17'] == "Yes" %}checked{% endif %}>
+      <label for="p17_yes">Yes</label>
+      <input type="radio" id="p17_yes" name="p17" value="No" {% if building['p17'] == "No" %}checked{% endif %}>
+      <label for="p17_no">No</label>
+
+      <label for="p18">P18 - Periodic Maintenance:</label>
+      <input type="radio" id="p18_yes" name="p18" value="Yes" {% if building['p18'] == "Yes" %}checked{% endif %}>
+      <label for="p18_yes">Yes</label>
+      <input type="radio" id="p18_yes" name="p18" value="No" {% if building['p18'] == "No" %}checked{% endif %}>
+      <label for="p18_no">No</label>
+
+      <label for="p19">P19 - Emergency Procedure:</label>
+      <input type="radio" id="p19_yes" name="p19" value="Yes" {% if building['p19'] == "Yes" %}checked{% endif %}>
+      <label for="p19_yes">Yes</label>
+      <input type="radio" id="p19_yes" name="p19" value="No" {% if building['p19'] == "No" %}checked{% endif %}>
+      <label for="p19_no">No</label>
+
+      <label for="p20">P20 - Maintenance Training:</label>
+      <input type="radio" id="p20_yes" name="p20" value="Yes" {% if building['p20'] == "Yes" %}checked{% endif %}>
+      <label for="p20_yes">Yes</label>
+      <input type="radio" id="p20_yes" name="p20" value="No" {% if building['p20'] == "No" %}checked{% endif %}>
+      <label for="p20_no">No</label>
+
+      <label for="p21">P21 - Excellent Service Training:</label>
+      <input type="radio" id="p21_yes" name="p21" value="Yes" {% if building['p21'] == "Yes" %}checked{% endif %}>
+      <label for="p21_yes">Yes</label>
+      <input type="radio" id="p21_yes" name="p21" value="No" {% if building['p21'] == "No" %}checked{% endif %}>
+      <label for="p21_no">No</label>
+
+      <div class="sub-identitas">Retrofit</div>
+      <label for="p22">P22 - AC Arrangement:</label>
+      <input type="radio" id="p22_yes" name="p22" value="Yes" {% if building["p22"] == "Yes" %}checked{% endif %}>
+      <label for="p22_yes">Yes</label>
+      <input type="radio" id="p22_yes" name="p22" value="No" {% if building["p22"] == "No" %}checked{% endif %}>
+      <label for="p22_no">No</label>
+
+      <label for="p23">P23 - AC Standard:</label>
+      <input type="radio" id="p23_yes" name="p23" value="Yes" {% if building["p23"] == "Yes" %}checked{% endif %}>
+      <label for="p23_yes">Yes</label>
+      <input type="radio" id="p23_yes" name="p23" value="No" {% if building["p23"] == "No" %}checked{% endif %}>
+      <label for="p23_no">No</label>
+
+      <label for="p24">P24 - Swith Area Coverage:</label>
+      <input type="radio" id="p24_yes" name="p24" value="Yes" {% if building["p24"] == "Yes" %}checked{% endif %}>
+      <label for="p24_yes">Yes</label>
+      <input type="radio" id="p24_yes" name="p24" value="No" {% if building["p24"] == "No" %}checked{% endif %}>
+      <label for="p24_no">No</label>
+
+      <label for="p25">P25 - Electrical Load Grouping:</label>
+      <input type="radio" id="p25_yes" name="p25" value="Yes" {% if building["p25"] == "Yes" %}checked{% endif %}>
+      <label for="p25_yes">Yes</label>
+      <input type="radio" id="p25_yes" name="p25" value="No" {% if building["p25"] == "No" %}checked{% endif %}>
+      <label for="p25_no">No</label>
+
+      <label for="p26">P26 - Building Management System:</label>
+      <input type="radio" id="p26_yes" name="p26" value="Yes" {% if building["p26"] == "Yes" %}checked{% endif %}>
+      <label for="p26_yes">Yes</label>
+      <input type="radio" id="p26_yes" name="p26" value="No" {% if building["p26"] == "No" %}checked{% endif %}>
+      <label for="p26_no">No</label>
+
+      <label for="p27">P27 - Renewable Energy Source:</label>
+      <input type="radio" id="p27_yes" name="p27" value="Yes" {% if building["p27"] == "Yes" %}checked{% endif %}>
+      <label for="p27_yes">Yes</label>
+      <input type="radio" id="p27_yes" name="p27" value="No" {% if building["p27"] == "No" %}checked{% endif %}>
+      <label for="p27_no">No</label>
+
+      <label for="p28">P28 - Ground Water Meter:</label>
+      <input type="radio" id="p28_yes" name="p28" value="Yes" {% if building["p28"] == "Yes" %}checked{% endif %}>
+      <label for="p28_yes">Yes</label>
+      <input type="radio" id="p28_yes" name="p28" value="No" {% if building["p28"] == "No" %}checked{% endif %}>
+      <label for="p28_no">No</label>
+
+      <label for="p29">P29 - Saving Water Consumption:</label>
+      <input type="radio" id="p29_yes" name="p29" value="Yes" {% if building["p29"] == "Yes" %}checked{% endif %}>
+      <label for="p29_yes">Yes</label>
+      <input type="radio" id="p29_yes" name="p29" value="No" {% if building["p29"] == "No" %}checked{% endif %}>
+      <label for="p29_no">No</label>
+
+      <label for="p30">P30 - Water Fixture Planning:</label>
+      <input type="radio" id="p30_yes" name="p30" value="Yes" {% if building["p30"] == "Yes" %}checked{% endif %}>
+      <label for="p30_yes">Yes</label>
+      <input type="radio" id="p30_yes" name="p30" value="No" {% if building["p30"] == "No" %}checked{% endif %}>
+      <label for="p30_no">No</label>
+
+      <label for="p31">P31 - Free Smoke Commitmen:</label>
+      <input type="radio" id="p31_yes" name="p31" value="Yes" {% if building["p31"] == "Yes" %}checked{% endif %}>
+      <label for="p31_yes">Yes</label>
+      <input type="radio" id="p31_yes" name="p31" value="No" {% if building["p31"] == "No" %}checked{% endif %}>
+      <label for="p31_no">No</label>
+
+      <label for="p32">P32 - Separated Smoking Area:</label>
+      <input type="radio" id="p32_yes" name="p32" value="Yes" {% if building["p32"] == "Yes" %}checked{% endif %}>
+      <label for="p32_yes">Yes</label>
+      <input type="radio" id="p32_yes" name="p32" value="No" {% if building["p32"] == "No" %}checked{% endif %}>
+      <label for="p32_no">No</label>
+
+      <label for="p33">P33 - Ozone Depletion Potential:</label>
+      <input type="number" step="0.1" id="p33" name="p33" placeholder="Ozone Depletion Potential" value="{{ building['p33'] }}" required>
+
+      <label for="p34">P34 - Global Warming Potential:</label>
+      <input type="number" step="1" id="p34" name="p34" placeholder="Global Warming Potential" value="{{ building['p34'] }}" required>
+
+      <label for="p35">P35 - Reduce Reuse Recycle Commitment:</label>
+      <input type="radio" id="p35_yes" name="p35" value="Yes" {% if building["p35"] == "Yes" %}checked{% endif %}>
+      <label for="p35_yes">Yes</label>
+      <input type="radio" id="p35_yes" name="p35" value="No" {% if building["p35"] == "No" %}checked{% endif %}>
+      <label for="p35_no">No</label>
+
+      <label for="p36">P36 - Rubbish Bin Provision:</label>
+      <input type="radio" id="p36_yes" name="p36" value="Yes" {% if building["p36"] == "Yes" %}checked{% endif %}>
+      <label for="p36_yes">Yes</label>
+      <input type="radio" id="p36_yes" name="p36" value="No" {% if building["p36"] == "No" %}checked{% endif %}>
+      <label for="p36_no">No</label>
+
+      <label for="p37">P37 - Temporay Garbage Place:</label>
+      <input type="radio" id="p37_yes" name="p37" value="Yes" {% if building["p37"] == "Yes" %}checked{% endif %}>
+      <label for="p37_yes">Yes</label>
+      <input type="radio" id="p37_yes" name="p37" value="No" {% if building["p37"] == "No" %}checked{% endif %}>
+      <label for="p37_no">No</label>
+
+      <label for="p38">P38 - Independent Waste Management:</label>
+      <input type="radio" id="p38_yes" name="p38" value="Yes" {% if building["p38"] == "Yes" %}checked{% endif %}>
+      <label for="p38_yes">Yes</label>
+      <input type="radio" id="p38_yes" name="p38" value="No" {% if building["p38"] == "No" %}checked{% endif %}>
+      <label for="p38_no">No</label>
+
+      <label for="p39">P39 - Waste Volume Recording:</label>
+      <input type="radio" id="p39_yes" name="p39" value="Yes" {% if building["p39"] == "Yes" %}checked{% endif %}>
+      <label for="p39_yes">Yes</label>
+      <input type="radio" id="p39_yes" name="p39" value="No" {% if building["p39"] == "No" %}checked{% endif %}>
+      <label for="p39_no">No</label>
+
+      <div class="sub-identitas">Construction</div>
+      <label for="p40">P40 - Initial Working Plan:</label>
+      <input type="radio" id="p40_yes" name="p40" value="Yes" {% if building["p40"] == "Yes" %}checked{% endif %}>
+      <label for="p40_yes">Yes</label>
+      <input type="radio" id="p40_yes" name="p40" value="No" {% if building["p40"] == "No" %}checked{% endif %}>
+      <label for="p40_no">No</label>
+
+      <label for="p41">P41 - Continuing Project Improvement:</label>
+      <input type="radio" id="p41_yes" name="p41" value="Yes" {% if building["p41"] == "Yes" %}checked{% endif %}>
+      <label for="p41_yes">Yes</label>
+      <input type="radio" id="p41_yes" name="p41" value="No" {% if building["p41"] == "No" %}checked{% endif %}>
+      <label for="p41_no">No</label>
+
+      <label for="p42">P42 - Data Integration Building:</label>
+      <input type="radio" id="p42_yes" name="p42" value="Yes" {% if building["p42"] == "Yes" %}checked{% endif %}>
+      <label for="p42_yes">Yes</label>
+      <input type="radio" id="p42_yes" name="p42" value="No" {% if building["p42"] == "No" %}checked{% endif %}>
+      <label for="p42_no">No</label>
+
+      <label for="p43">P43 - Innovate Green Construction:</label>
+      <input type="radio" id="p43_yes" name="p43" value="Yes" {% if building["p43"] == "Yes" %}checked{% endif %}>
+      <label for="p43_yes">Yes</label>
+      <input type="radio" id="p43_yes" name="p43" value="No" {% if building["p43"] == "No" %}checked{% endif %}>
+      <label for="p43_no">No</label>
+
+      <label for="p44">P44 - Innovate Green Operation:</label>
+      <input type="radio" id="p44_yes" name="p44" value="Yes" {% if building["p44"] == "Yes" %}checked{% endif %}>
+      <label for="p44_yes">Yes</label>
+      <input type="radio" id="p44_yes" name="p44" value="No" {% if building["p44"] == "No" %}checked{% endif %}>
+      <label for="p44_no">No</label>
+
+      <label for="p45">P45 - Fuel Efficiency:</label>
+      <input type="radio" id="p45_yes" name="p45" value="Yes" {% if building["p45"] == "Yes" %}checked{% endif %}>
+      <label for="p45_yes">Yes</label>
+      <input type="radio" id="p45_yes" name="p45" value="No" {% if building["p45"] == "No" %}checked{% endif %}>
+      <label for="p45_no">No</label>
+
+      <label for="p46">P46 - Construction Technology:</label>
+      <input type="radio" id="p46_yes" name="p46" value="Yes" {% if building["p46"] == "Yes" %}checked{% endif %}>
+      <label for="p46_yes">Yes</label>
+      <input type="radio" id="p46_yes" name="p46" value="No" {% if building["p46"] == "No" %}checked{% endif %}>
+      <label for="p46_no">No</label>
+
+      <label for="p47">P47 - Safety Material Construction:</label>
+      <input type="radio" id="p47_yes" name="p47" value="Yes" {% if building["p47"] == "Yes" %}checked{% endif %}>
+      <label for="p47_yes">Yes</label>
+      <input type="radio" id="p47_yes" name="p47" value="No" {% if building["p47"] == "No" %}checked{% endif %}>
+      <label for="p47_no">No</label>
+
+      <label for="p48">P48 - Initial Working Plan:</label>
+      <input type="radio" id="p48_yes" name="p48" value="Yes" {% if building["p48"] == "Yes" %}checked{% endif %}>
+      <label for="p48_yes">Yes</label>
+      <input type="radio" id="p48_yes" name="p48" value="No" {% if building["p48"] == "No" %}checked{% endif %}>
+      <label for="p48_no">No</label>
+
+      <label for="p49">P49 - Waste Sorting:</label>
+      <input type="radio" id="p49_yes" name="p49" value="Yes" {% if building["p49"] == "Yes" %}checked{% endif %}>
+      <label for="p49_yes">Yes</label>
+      <input type="radio" id="p49_yes" name="p49" value="No" {% if building["p49"] == "No" %}checked{% endif %}>
+      <label for="p49_no">No</label>
+      
+      <label for="p50">P50 - Initial Working Plan:</label>
+      <input type="radio" id="p50_yes" name="p50" value="Yes" {% if building["p50"] == "Yes" %}checked{% endif %}>
+      <label for="p50_yes">Yes</label>
+      <input type="radio" id="p50_yes" name="p50" value="No" {% if building["p50"] == "No" %}checked{% endif %}>
+      <label for="p50_no">No</label>
+
+      <label for="p51_1">P51_1 - Waste Consumption of Last Month 1:</label>
+      <input type="number" step="0.1" id="p51_1" name="p51_1" placeholder="Waste Consumption of Last Month 1 (Rupiah)" value="{{ building['p51_1'] }}" required>
+
+      <label for="p51_2">P51_2 - Waste Consumption of Last Month 2:</label>
+      <input type="number" step="0.1" id="p51_2" name="p51_2" placeholder="Waste Consumption of Last Month 2 (Rupiah)" value="{{ building['p51_2'] }}" required>
+
+      <label for="p51_3">P51_3 - Waste Consumption of Last Month 3:</label>
+      <input type="number" step="0.1" id="p51_3" name="p51_3" placeholder="Waste Consumption of Last Month 3 (Rupiah)" value="{{ building['p51_3'] }}" required>
+
+      <label for="p51_4">P51_4 - Waste Consumption of Last Month 4:</label>
+      <input type="number" step="0.1" id="p51_4" name="p51_4" placeholder="Waste Consumption of Last Month 4 (Rupiah)" value="{{ building['p51_4'] }}" required>
+
+      <label for="p51_5">P51_5 - Waste Consumption of Last Month 5:</label>
+      <input type="number" step="0.1" id="p51_5" name="p51_5" placeholder="Waste Consumption of Last Month 5 (Rupiah)" value="{{ building['p51_5'] }}" required>
+
+      <label for="p51_6">P51_6 - Waste Consumption of Last Month 6:</label>
+      <input type="number" step="0.1" id="p51_6" name="p51_6" placeholder="Waste Consumption of Last Month 6 (Rupiah)" value="{{ building['p51_6'] }}" required>
+
+      <label for="p52">P52 - Waste Construction Principle:</label>
+      <input type="radio" id="p52_yes" name="p52" value="Yes" {% if building["p52"] == "Yes" %}checked{% endif %}>
+      <label for="p52_yes">Yes</label>
+      <input type="radio" id="p52_yes" name="p52" value="No" {% if building["p52"] == "No" %}checked{% endif %}>
+      <label for="p52_no">No</label>
+
+      <label for="p53">P53 - Copy Shop Drawing:</label>
+      <input type="radio" id="p53_yes" name="p53" value="Yes" {% if building["p53"] == "Yes" %}checked{% endif %}>
+      <label for="p53_yes">Yes</label>
+      <input type="radio" id="p53_yes" name="p53" value="No" {% if building["p53"] == "No" %}checked{% endif %}>
+      <label for="p53_no">No</label>
+
+      <label for="p54">P54 - Copy List Approval Material:</label>
+      <input type="radio" id="p54_yes" name="p54" value="Yes" {% if building["p54"] == "Yes" %}checked{% endif %}>
+      <label for="p54_yes">Yes</label>
+      <input type="radio" id="p54_yes" name="p54" value="No" {% if building["p54"] == "No" %}checked{% endif %}>
+      <label for="p54_no">No</label>
+
+      <label for="p55">P55 - Testing And Commission Report:</label>
+      <input type="radio" id="p55_yes" name="p55" value="Yes" {% if building["p55"] == "Yes" %}checked{% endif %}>
+      <label for="p55_yes">Yes</label>
+      <input type="radio" id="p55_yes" name="p55" value="No" {% if building["p55"] == "No" %}checked{% endif %}>
+      <label for="p55_no">No</label>
+
+      <label for="p56">P56 - System Tool Operation Report:</label>
+      <input type="radio" id="p56_yes" name="p56" value="Yes" {% if building["p56"] == "Yes" %}checked{% endif %}>
+      <label for="p56_yes">Yes</label>
+      <input type="radio" id="p56_yes" name="p56" value="No" {% if building["p56"] == "No" %}checked{% endif %}>
+      <label for="p56_no">No</label>
+
+      <label for="p57">P57 - Main Equipment Warranty:</label>
+      <input type="radio" id="p57_yes" name="p57" value="Yes" {% if building["p57"] == "Yes" %}checked{% endif %}>
+      <label for="p57_yes">Yes</label>
+      <input type="radio" id="p57_yes" name="p57" value="No" {% if building["p57"] == "No" %}checked{% endif %}>
+      <label for="p57_no">No</label>
+
+      <label for="p58">P58 - Manual Tools Documentation:</label>
+      <input type="radio" id="p58_yes" name="p58" value="Yes" {% if building["p58"] == "Yes" %}checked{% endif %}>
+      <label for="p58_yes">Yes</label>
+      <input type="radio" id="p58_yes" name="p58" value="No" {% if building["p58"] == "No" %}checked{% endif %}>
+      <label for="p58_no">No</label>
+
+      <label for="p59">P59 - Valid As Build Drawaing Report:</label>
+      <input type="radio" id="p59_yes" name="p59" value="Yes" {% if building["p59"] == "Yes" %}checked{% endif %}>
+      <label for="p59_yes">Yes</label>
+      <input type="radio" id="p59_yes" name="p59" value="No" {% if building["p59"] == "No" %}checked{% endif %}>
+      <label for="p59_no">No</label>
+
+      <div class="sub-identitas">Utilization</div>
+      <label for="p60">P60 - Friendly Pest Material:</label>
+      <input type="radio" id="p60_yes" name="p60" value="Yes" {% if building["p60"] == "Yes" %}checked{% endif %}>
+      <label for="p60_yes">Yes</label>
+      <input type="radio" id="p60_yes" name="p60" value="No" {% if building["p60"] == "No" %}checked{% endif %}>
+      <label for="p60_no">No</label>
+
+      <label for="p61_1">P61_1 - Energy Consumption of Last Month 1:</label>
+      <input type="number" step="0.1" id="p61_1" name="p61_1" placeholder="Energy Consumption of Last Month 1 (Rupiah)" value="{{ building['p61_1'] }}" required>
+
+      <label for="p61_2">P61_2 - Energy Consumption of Last Month 2:</label>
+      <input type="number" step="0.1" id="p61_2" name="p61_2" placeholder="Energy Consumption of Last Month 2 (Rupiah)" value="{{ building['p61_2'] }}" required>
+
+      <label for="p61_3">P61_3 - Energy Consumption of Last Month 3:</label>
+      <input type="number" step="0.1" id="p61_3" name="p61_3" placeholder="Energy Consumption of Last Month 3 (Rupiah)" value="{{ building['p61_3'] }}" required>
+
+      <label for="p61_4">P61_4 - Energy Consumption of Last Month 4:</label>
+      <input type="number" step="0.1" id="p61_4" name="p61_4" placeholder="Energy Consumption of Last Month 4 (Rupiah)" value="{{ building['p61_4'] }}" required>
+
+      <label for="p61_5">P61_5 - Energy Consumption of Last Month 5:</label>
+      <input type="number" step="0.1" id="p61_5" name="p61_5" placeholder="Energy Consumption of Last Month 5 (Rupiah)" value="{{ building['p61_5'] }}" required>
+
+      <label for="p61_6">P61_6 - Energy Consumption of Last Month 6:</label>
+      <input type="number" step="0.1" id="p61_6" name="p61_6" placeholder="Energy Consumption of Last Month 6 (Rupiah)" value="{{ building['p61_6'] }}" required>
+
+      <label for="p62">P62 - Lift Maintenance Scheduling:</label>
+      <input type="radio" id="p62_yes" name="p62" value="Yes" {% if building["p62"] == "Yes" %}checked{% endif %}>
+      <label for="p62_yes">Yes</label>
+      <input type="radio" id="p62_yes" name="p62" value="No" {% if building["p62"] == "No" %}checked{% endif %}>
+      <label for="p62_no">No</label>
+
+      <label for="p63">P63 - Energy Usage Reference:</label>
+      <input type="text" id="p63" name="p63" placeholder="Energy Usage Reference (Rupiah)" value="{{ building['p63'] }}" required>
+
+      <label for="p64">P64 - Recommissioning:</label>
+      <input type="radio" id="p64_yes" name="p64" value="Yes" {% if building["p64"] == "Yes" %}checked{% endif %}>
+      <label for="p64_yes">Yes</label>
+      <input type="radio" id="p64_yes" name="p64" value="No" {% if building["p64"] == "No" %}checked{% endif %}>
+      <label for="p64_no">No</label>
+
+      <label for="p65">P65 - No Addition Ground Water Volume:</label>
+      <input type="radio" id="p65_yes" name="p65" value="Yes" {% if building["p65"] == "Yes" %}checked{% endif %}>
+      <label for="p65_yes">Yes</label>
+      <input type="radio" id="p65_yes" name="p65" value="No" {% if building["p65"] == "No" %}checked{% endif %}>
+      <label for="p65_no">No</label>
+
+      <label for="p66">P66 - Friendly Pest Material:</label>
+      <input type="radio" id="p66_yes" name="p66" value="Yes" {% if building["p66"] == "Yes" %}checked{% endif %}>
+      <label for="p66_yes">Yes</label>
+      <input type="radio" id="p66_yes" name="p66" value="No" {% if building["p66"] == "No" %}checked{% endif %}>
+      <label for="p66_no">No</label>
+
+      <label for="p67_1">p67_1 - Water Fixture Reference:</label>
+      <input type="number" step="0.1" id="p67_1" name="p67_1" placeholder="Water Fixture Reference (unit)" value="{{ building['p67_1'] }}" required>
+
+      <label for="p67_2">P67_2 - Product Fixture Reality:</label>
+      <input type="number" step="0.1" id="p67_2" name="p67_2" placeholder="Product Fixture Reality (unit)" value="{{ building['p67_2'] }}" required>
+
+      <label for="p68_1">P68_1 - Water Consumption of Last Month 1:</label>
+      <input type="number" step="0.1" id="p68_1" name="p68_1" placeholder="Water Consumption of Last Month 1 (Rupiah)" value="{{ building['p68_1'] }}" required>
+
+      <label for="p68_2">P68_2 - Water Consumption of Last Month 2:</label>
+      <input type="number" step="0.1" id="p68_2" name="p68_2" placeholder="Water Consumption of Last Month 2 (Rupiah)" value="{{ building['p68_2'] }}" required>
+
+      <label for="p68_3">P68_3 - Water Consumption of Last Month 3:</label>
+      <input type="number" step="0.1" id="p68_3" name="p68_3" placeholder="Water Consumption of Last Month 3 (Rupiah)" value="{{ building['p68_3'] }}" required>
+
+      <label for="p68_4">P68_4 - Water Consumption of Last Month 4:</label>
+      <input type="number" step="0.1" id="p68_4" name="p68_4" placeholder="Water Consumption of Last Month 4 (Rupiah)" value="{{ building['p68_4'] }}" required>
+
+      <label for="p68_5">P68_5 - Water Consumption of Last Month 5:</label>
+      <input type="number" step="0.1" id="p68_5" name="p68_5" placeholder="Water Consumption of Last Month 5 (Rupiah)" value="{{ building['p68_5'] }}" required>
+
+      <label for="p68_6">P68_6 - Water Consumption of Last Month 6:</label>
+      <input type="number" step="0.1" id="p68_6" name="p68_6" placeholder="Water Consumption of Last Month 6 (Rupiah)" value="{{ building['p68_6'] }}" required>
+
+      <label for="p69">P69 - Water Consumption Reference:</label>
+      <input type="text" id="p69" name="p69" placeholder="Water Consumption Reference (Rupiah)" value="{{ building['p69'] }}" required>
+
+      <label for="p70">P70 - Ground Water Percentage:</label>
+      <input type="radio" id="p70_yes" name="p70" value="Yes" {% if building["p70"] == "Yes" %}checked{% endif %}>
+      <label for="p70_yes">Yes</label>
+      <input type="radio" id="p70_yes" name="p70" value="No" {% if building["p70"] == "No" %}checked{% endif %}>
+      <label for="p70_no">No</label>
+
+      <label for="p71">P71 - Last Water Lab Month:</label>
+      <input type="date" id="p71" name="p71" placeholder="Last Water Lab Month (Date)" value="{{ building['p71'] }}" required>
+
+      <label for="p72">P72 - Temperature:</label>
+      <input type="number" step="0.1" id="p72" name="p72" placeholder="Temperature (Celcius)" value="{{ building['p72'] }}" required>
+
+      <label for="p73">P73 - Humidity:</label>
+      <input type="number" step="0.1" id="p73" name="p73" placeholder="Humidity (%)" value="{{ building['p73'] }}" required>
+
+      <label for="p74">P74 - No Smoking Warning:</label>
+      <input type="radio" id="p74_yes" name="p74" value="Yes" {% if building["p74"] == "Yes" %}checked{% endif %}>
+      <label for="p74_yes">Yes</label>
+      <input type="radio" id="p74_yes" name="p74" value="No" {% if building["p74"] == "No" %}checked{% endif %}>
+      <label for="p74_no">No</label>
+
+      <label for="p75">P75 - Waste Sorting:</label>
+      <input type="radio" id="p75_yes" name="p75" value="Yes" {% if building["p75"] == "Yes" %}checked{% endif %}>
+      <label for="p75_yes">Yes</label>
+      <input type="radio" id="p75_yes" name="p75" value="No" {% if building["p75"] == "No" %}checked{% endif %}>
+      <label for="p75_no">No</label>
+
+      <label for="p76">P76 - Rubbish Bin Provision:</label>
+      <input type="radio" id="p76_yes" name="p76" value="Yes" {% if building["p76"] == "Yes" %}checked{% endif %}>
+      <label for="p76_yes">Yes</label>
+      <input type="radio" id="p76_yes" name="p76" value="No" {% if building["p76"] == "No" %}checked{% endif %}>
+      <label for="p76_no">No</label>
+
+      <label for="p77">P77 - Temporary Garbage Dump:</label>
+      <input type="radio" id="p77_yes" name="p77" value="Yes" {% if building["p77"] == "Yes" %}checked{% endif %}>
+      <label for="p77_yes">Yes</label>
+      <input type="radio" id="p77_yes" name="p77" value="No" {% if building["p77"] == "No" %}checked{% endif %}>
+      <label for="p77_no">No</label>
+
+      <label for="p78">P78 - Full Waste Dump Checking:</label>
+      <input type="radio" id="p78_yes" name="p78" value="Yes" {% if building["p78"] == "Yes" %}checked{% endif %}>
+      <label for="p78_yes">Yes</label>
+      <input type="radio" id="p78_yes" name="p78" value="No" {% if building["p78"] == "No" %}checked{% endif %}>
+      <label for="p78_no">No</label>
+
+      <label for="p79_1">P79_1 - Waste Consumption of Last Month 1:</label>
+      <input type="number" step="0.1" id="p79_1" name="p79_1" placeholder="Waste Consumption of Last Month 1 (m3)" value="{{ building['p79_1'] }}" required>
+
+      <label for="p79_2">P79_2 - Waste Consumption of Last Month 2:</label>
+      <input type="number" step="0.1" id="p79_2" name="p79_2" placeholder="Waste Consumption of Last Month 2 (m3)" value="{{ building['p79_2'] }}" required>
+
+      <label for="p79_3">P79_3 - Waste Consumption of Last Month 3:</label>
+      <input type="number" step="0.1" id="p79_3" name="p79_3" placeholder="Waste Consumption of Last Month 3 (m3)" value="{{ building['p79_3'] }}" required>
+
+      <label for="p79_4">P79_4 - Waste Consumption of Last Month 4:</label>
+      <input type="number" step="0.1" id="p79_4" name="p79_4" placeholder="Waste Consumption of Last Month 4 (m3)" value="{{ building['p79_4'] }}" required>
+
+      <label for="p79_5">P79_5 - Waste Consumption of Last Month 5:</label>
+      <input type="number" step="0.1" id="p79_5" name="p79_5" placeholder="Waste Consumption of Last Month 5 (m3)" value="{{ building['p79_5'] }}" required>
+
+      <label for="p79_6">P79_6 - Waste Consumption of Last Month 6:</label>
+      <input type="number" step="0.1" id="p79_6" name="p79_6" placeholder="Waste Consumption of Last Month 6 (m3)" value="{{ building['p79_6'] }}" required>
+
+      <label for="p80">P80 - Recycled Water Lab:</label>
+      <input type="radio" id="p80_yes" name="p80" value="Yes" {% if building["p80"] == "Yes" %}checked{% endif %}>
+      <label for="p80_yes">Yes</label>
+      <input type="radio" id="p80_yes" name="p80" value="No" {% if building["p80"] == "No" %}checked{% endif %}>
+      <label for="p80_no">No</label>
+
+      <label for="p81">P81 - Green Building Socialization:</label>
+      <input type="radio" id="p81_yes" name="p81" value="Yes" {% if building["p81"] == "Yes" %}checked{% endif %}>
+      <label for="p81_yes">Yes</label>
+      <input type="radio" id="p81_yes" name="p81" value="No" {% if building["p81"] == "No" %}checked{% endif %}>
+      <label for="p81_no">No</label>
+
+      <label for="p82">P82 - Green Achivement Publication:</label>
+      <input type="radio" id="p82_yes" name="p82" value="Yes" {% if building["p82"] == "Yes" %}checked{% endif %}>
+      <label for="p82_yes">Yes</label>
+      <input type="radio" id="p82_yes" name="p82" value="No" {% if building["p82"] == "No" %}checked{% endif %}>
+      <label for="p82_no">No</label>
+
+      <label for="p83">P83 - Customer Satisfaction Survey:</label>
+      <input type="radio" id="p83_yes" name="p83" value="Yes" {% if building["p83"] == "Yes" %}checked{% endif %}>
+      <label for="p83_yes">Yes</label>
+      <input type="radio" id="p83_yes" name="p83" value="No" {% if building["p83"] == "No" %}checked{% endif %}>
+      <label for="p83_no">No</label>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+  </section>
+  <footer>
+    <hr>
+    <p>
+      <small>Code <a href="https://github.com/akbarbin/green-building" target="_blank">Github &nearr;</a><br></small>
+    </p>
+  </footer>
 </body>
 </html>
