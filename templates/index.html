@@ -12,6 +12,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Green Building Assessments</title>
+  <style>
+    .container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+    }
+
+    /* Then style the iframe to fit in the container div with full height and width */
+    .responsive-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,13 +45,17 @@
     <h1>A way to evaluate <i>building</i> to show its <u>green</u></h1>
     <p>See your green building <mark>performance</mark> instantly here.</p>
     <br>
-    <p><a href="/buildings"><i>Assessments Analytic</i></a><a href="/buildings/new"><b>Let's evaluate your building &rarr;</b></a></p>
+    <p><a href="/#analytics"><i>Checkout Analytics</i></a><a href="/buildings/new"><b>Let's evaluate your building &rarr;</b></a></p>
   </header>
+
+  <section id="analytics" class="container">
+    <iframe class="responsive-iframe" src="https://lookerstudio.google.com/embed/reporting/6a599503-dd3c-477f-8a3c-60f3e0343c77/page/FjrXD" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </section>
 
   <footer>
     <hr>
     <p>
-      <small>Code <a href="https://github.com/akbarbin/green-building" target="_blank">Github &nearr;</a><br></small>
+      <small><a href="https://github.com/akbarbin/green-building" target="_blank">Github &nearr;</a><br></small>
     </p>
   </footer>
 </body>
