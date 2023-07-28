@@ -15,7 +15,7 @@ app = Flask(__name__)
 my_dir = os.path.dirname(__file__)
 
 @app.route('/api/assessments')
-def assessments():
+def api_assessments():
   try:
     filename = os.path.join(my_dir, 'data/buildings.json')
 
@@ -52,7 +52,7 @@ def assessments():
   return Response(response=json_data, status=200, content_type='application/json')
 
 @app.route('/api/consumptions')
-def consumptions():
+def api_consumptions():
   try:
     filename = os.path.join(my_dir, 'data/buildings.json')
 
@@ -84,6 +84,56 @@ def consumptions():
         consumptions.append({'building_id': building['id'], 'name': building['name'], 'month': month, 'code': cx_param['code'], 'value': building[f"{cx_param['code']}_{month}"]})
 
   json_data = json.dumps(consumptions, indent=2, separators=(',', ': '))
+  return Response(response=json_data, status=200, content_type='application/json')
+
+@app.route('/api/buildings')
+def api_buildings():
+  try:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
+      buildings = json.load(file)
+  except FileNotFoundError:
+    buildings = []
+
+  try:
+    filename = os.path.join(my_dir, 'parameters.json')
+
+    with open(filename, 'r') as file:
+      parameters = json.load(file)
+  except FileNotFoundError:
+    parameters = []
+
+  try:
+    filename = os.path.join(my_dir, 'data/assessments.json')
+
+    with open(filename, 'r') as file:
+      assessments = json.load(file)
+  except FileNotFoundError:
+    assessments = []
+
+  for building in buildings:
+    total_policy = 0
+    total_retrofit = 0
+    total_construction = 0
+    total_utilization = 0
+    for assessment in assessments:
+      if building['id'] == assessment['building_id']:
+        parameter = find_json_by('code', parameters, assessment['code'])
+        if parameter['category'] == 'Policy':
+          total_policy += assessment['value']
+        elif parameter['category'] == 'Retrofit':
+          total_retrofit += assessment['value']
+        elif parameter['category'] == 'Construction':
+          total_construction += assessment['value']
+        else:
+          total_utilization += assessment['value']
+    building['policy'] = round(total_policy, 4)
+    building['retrofit'] = round(total_retrofit, 4)
+    building['construction'] = round(total_construction, 4)
+    building['utilization'] = round(total_utilization, 4)
+
+  json_data = json.dumps(buildings, indent=2, separators=(',', ': '))
   return Response(response=json_data, status=200, content_type='application/json')
 
 @app.route('/')
@@ -321,7 +371,7 @@ def evaluate(id):
       value = round(point['value'] * cx_param['weight'], 4)
 
       # Saving performance
-      assessments.append({ "building_id": building['id'], "code": cx_param['code'], "point": point['value'], "weight": cx_param['weight'], "value": value })
+      assessments.append({ "building_id": building['id'], "code": cx_param['code'], "point": round(point['value'], 4), "weight": cx_param['weight'], "value": value })
 
       total_cx += value
 
@@ -366,7 +416,7 @@ def evaluate(id):
       value = round(point['value'] * dx_param['weight'], 4)
 
       # Saving performance
-      assessments.append({ "building_id": building['id'], "code": dx_param['code'], "point": point['value'], "weight": dx_param['weight'], "value": value })
+      assessments.append({ "building_id": building['id'], "code": dx_param['code'], "point": round(point['value'], 4), "weight": dx_param['weight'], "value": value })
 
       total_dx += value
 
