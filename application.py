@@ -51,6 +51,41 @@ def assessments():
   json_data = json.dumps(assessments, indent=2, separators=(',', ': '))
   return Response(response=json_data, status=200, content_type='application/json')
 
+@app.route('/api/consumptions')
+def consumptions():
+  try:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
+      buildings = json.load(file)
+  except FileNotFoundError:
+    buildings = []
+
+  try:
+    filename = os.path.join(my_dir, 'parameters.json')
+
+    with open(filename, 'r') as file:
+      parameters = json.load(file)
+  except FileNotFoundError:
+    parameters = []
+
+  cx_params = []
+  for sub in parameters:
+    if sub['group'] == 'cx':
+      cx_params.append(sub)
+
+  consumptions = []
+  for building in buildings:
+    for cx_param in cx_params:
+      parameter = find_json_by('code', parameters, cx_param['code'])
+      months = [1, 2, 3, 4, 5, 6]
+
+      for month in months:
+        consumptions.append({'building_id': building['id'], 'name': building['name'], 'month': month, 'code': cx_param['code'], 'value': building[f"{cx_param['code']}_{month}"]})
+
+  json_data = json.dumps(consumptions, indent=2, separators=(',', ': '))
+  return Response(response=json_data, status=200, content_type='application/json')
+
 @app.route('/')
 def index():
   return render_template('index.html')
