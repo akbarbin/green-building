@@ -136,6 +136,15 @@ def api_buildings():
   json_data = json.dumps(buildings, indent=2, separators=(',', ': '))
   return Response(response=json_data, status=200, content_type='application/json')
 
+@app.route('/api/buildings', methods=['POST'])
+def create_buildings():
+  form_data = request.get_json()
+  create_building(form_data)
+  evaluate_buildings()
+
+  json_data = json.dumps(form_data, indent=2, separators=(',', ': '))
+  return Response(response=json_data, status=200, content_type='application/json')
+
 @app.route('/')
 def index():
   return render_template('index.html')
@@ -162,8 +171,58 @@ def new():
 @app.route('/buildings', methods=['POST'])
 def create():
   form_data = request.form.to_dict()
+  create_building(form_data)
+  return redirect(url_for('show', id= form_data['id']))
 
+@app.route('/buildings/<int:id>')
+def show(id):
   # Reading JSON file
+  try:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
+      buildings = json.load(file)
+  except FileNotFoundError:
+    buildings = []
+
+  building = find_json_by('id', buildings, id)
+
+  return render_template('show.html', building=building)
+
+@app.route('/buildings/<int:id>/evaluate', methods=['POST'])
+def evaluate(id):
+  evaluate_buildings()
+  return redirect(url_for('show', id= id))
+
+def find_json_by(key, array, id):
+  for item in array:
+    if item[key] == id:
+      return item
+  return None
+
+def find_json_by_two_conditions(keys, array, values):
+  for item in array:
+    if item[keys[0]] == values[0] and item[keys[1]] == values[1]:
+      return item
+  return None
+
+def calculate_slope(time_series):
+  n = len(time_series)
+
+  # Calculate the mean of x (time indices) and y (time series values)
+  mean_x = sum(range(n)) / n
+  mean_y = sum(time_series) / n
+
+  # Calculate the slope (m) of the regression line
+  numerator = sum((i - mean_x) * (y - mean_y) for i, y in enumerate(time_series))
+  denominator = sum((i - mean_x) ** 2 for i in range(n))
+
+  slope = numerator / denominator
+
+  return slope
+
+def create_building(form_data):
+    # Reading JSON file
   try:
     filename = os.path.join(my_dir, 'data/buildings.json')
 
@@ -226,25 +285,7 @@ def create():
     json.dump(json_data, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
 
-  return redirect(url_for('show', id= form_data['id']))
-
-@app.route('/buildings/<int:id>')
-def show(id):
-  # Reading JSON file
-  try:
-    filename = os.path.join(my_dir, 'data/buildings.json')
-
-    with open(filename, 'r') as file:
-      buildings = json.load(file)
-  except FileNotFoundError:
-    buildings = []
-
-  building = find_json_by('id', buildings, id)
-
-  return render_template('show.html', building=building)
-
-@app.route('/buildings/<int:id>/evaluate', methods=['POST'])
-def evaluate(id):
+def evaluate_buildings():
   # Reading JSON file
   try:
     filename = os.path.join(my_dir, 'parameters.json')
@@ -450,35 +491,6 @@ def evaluate(id):
   with open(filename, 'w') as file:
     json.dump(buildings_json_data, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
-
-  return redirect(url_for('show', id= id))
-
-def find_json_by(key, array, id):
-  for item in array:
-    if item[key] == id:
-      return item
-  return None
-
-def find_json_by_two_conditions(keys, array, values):
-  for item in array:
-    if item[keys[0]] == values[0] and item[keys[1]] == values[1]:
-      return item
-  return None
-
-def calculate_slope(time_series):
-  n = len(time_series)
-
-  # Calculate the mean of x (time indices) and y (time series values)
-  mean_x = sum(range(n)) / n
-  mean_y = sum(time_series) / n
-
-  # Calculate the slope (m) of the regression line
-  numerator = sum((i - mean_x) * (y - mean_y) for i, y in enumerate(time_series))
-  denominator = sum((i - mean_x) ** 2 for i in range(n))
-
-  slope = numerator / denominator
-
-  return slope
 
 if __name__ == '__main__':
   app.run()
