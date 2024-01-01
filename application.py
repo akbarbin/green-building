@@ -232,7 +232,7 @@ def create_building(form_data):
     json_data = []
 
   # Changing string data type into correct one
-  form_data['id'] = json_data[-1].get('id', 0) + 1 if len(json_data) else 1
+  form_data['id'] = json_data[0].get('id', 0) + 1 if len(json_data) else 1
   form_data['p33'] = float(form_data['p33'])
   form_data['p34'] = int(form_data['p34'])
   form_data['p63'] = float(form_data['p63'])
@@ -267,7 +267,7 @@ def create_building(form_data):
   form_data['p73'] = float(form_data['p73'])
 
   # Adding form_data to json_data array
-  json_data.append(form_data)
+  json_data.insert(0, form_data)
 
   # Saving array json_data into JSON file
   filename = os.path.join(my_dir, 'data/buildings.json')
