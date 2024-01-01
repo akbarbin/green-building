@@ -164,7 +164,7 @@ def buildings():
 @app.route('/buildings/new')
 def new():
   # Adding default value in the new form
-  data = '{"name": "", "p01": "Yes", "p02": "Yes", "p03": "Yes", "p04": "Yes", "p05": "Yes", "p06": "Yes", "p07": "Yes", "p08": "Yes", "p09": "Yes", "p10": "Yes", "p11": "Yes", "p12": "Yes", "p13": "Yes", "p14": "Yes", "p15": "Yes", "p16": "Yes", "p17": "Yes", "p18": "Yes", "p19": "Yes", "p20": "Yes", "p21": "Yes", "p22": "Yes", "p23": "Yes", "p24": "Yes", "p25": "Yes", "p26": "Yes", "p27": "Yes", "p28": "Yes", "p29": "Yes", "p30": "Yes", "p31": "Yes", "p32": "Yes", "p33": 0, "p34": 675, "p35": "Yes", "p36": "Yes", "p37": "Yes", "p38": "Yes", "p39": "Yes", "p40": "Yes", "p41": "Yes", "p42": "Yes", "p43": "Yes", "p44": "Yes", "p45": "Yes", "p46": "Yes", "p47": "Yes", "p48": "Yes", "p49": "Yes", "p50": "Yes", "p51_1": 3000, "p51_2": 4000, "p51_3": 5000, "p51_4": 4000, "p51_5": 7000, "p51_6": 1500, "p52": "Yes", "p53": "Yes", "p54": "Yes", "p55": "Yes", "p56": "Yes", "p57": "Yes", "p58": "Yes", "p59": "Yes", "p60": "Yes", "p61_1": 4000000.0, "p61_2": 5000000.0, "p61_3": 4000000.0, "p61_4": 4000000.0, "p61_5": 5000000.0, "p61_6": 4400000.0, "p62": "Yes", "p63": 500000000, "p64": "Yes", "p65": "Yes", "p66": "Yes", "p67_1": 5.0, "p67_2": 5.0, "p68_1": 4000000,  "p68_2": 4000000, "p68_3": 4000000, "p68_4": 4000000, "p68_5": 4000000, "p68_6": 4200000, "p69": 10000000, "p70": "Yes", "p71": "2022/12/09", "p72": 23.0, "p73": 36, "p74": "Yes", "p75": "Yes", "p76": "Yes", "p77": "Yes", "p78": "Yes", "p79_1": 33.48, "p79_2": 32.40, "p79_3": 34.56, "p79_4": 29.64, "p79_5": 16.44, "p79_6": 35.76,  "p80": "Yes", "p81": "Yes", "p82": "Yes", "p83": "Yes"}'
+  data = '{"name": "", "p01": "Yes", "p02": "Yes", "p03": "Yes", "p04": "Yes", "p05": "Yes", "p06": "Yes", "p07": "Yes", "p08": "Yes", "p09": "Yes", "p10": "Yes", "p11": "Yes", "p12": "Yes", "p13": "Yes", "p14": "Yes", "p15": "Yes", "p16": "Yes", "p17": "Yes", "p18": "Yes", "p19": "Yes", "p20": "Yes", "p21": "Yes", "p22": "Yes", "p23": "Yes", "p24": "Yes", "p25": "Yes", "p26": "Yes", "p27": "Yes", "p28": "Yes", "p29": "Yes", "p30": "Yes", "p31": "Yes", "p32": "Yes", "p33": 0.0, "p34": 675, "p35": "Yes", "p36": "Yes", "p37": "Yes", "p38": "Yes", "p39": "Yes", "p40": "Yes", "p41": "Yes", "p42": "Yes", "p43": "Yes", "p44": "Yes", "p45": "Yes", "p46": "Yes", "p47": "Yes", "p48": "Yes", "p49": "Yes", "p50": "Yes", "p51_1": 3000, "p51_2": 4000, "p51_3": 5000, "p51_4": 4000, "p51_5": 7000, "p51_6": 1500, "p52": "Yes", "p53": "Yes", "p54": "Yes", "p55": "Yes", "p56": "Yes", "p57": "Yes", "p58": "Yes", "p59": "Yes", "p60": "Yes", "p61_1": 4000000.0, "p61_2": 5000000.0, "p61_3": 4000000.0, "p61_4": 4000000.0, "p61_5": 5000000.0, "p61_6": 4400000.0, "p62": "Yes", "p63": 500000000.0, "p64": "Yes", "p65": "Yes", "p66": "Yes", "p67_1": 5.0, "p67_2": 5.0, "p68_1": 4000000.0,  "p68_2": 4000000.0, "p68_3": 4000000.0, "p68_4": 4000000.0, "p68_5": 4000000.0, "p68_6": 4200000.0, "p69": 10000000.0, "p70": "Yes", "p71": "2022-12-09", "p72": 23.0, "p73": 36, "p74": "Yes", "p75": "Yes", "p76": "Yes", "p77": "Yes", "p78": "Yes", "p79_1": 33.48, "p79_2": 32.40, "p79_3": 34.56, "p79_4": 29.64, "p79_5": 16.44, "p79_6": 35.76,  "p80": "Yes", "p81": "Yes", "p82": "Yes", "p83": "Yes"}'
   building = json.loads(data)
   return render_template('new.html', building=building)
 
@@ -266,14 +266,6 @@ def create_building(form_data):
   form_data['p72'] = float(form_data['p72'])
   form_data['p73'] = float(form_data['p73'])
 
-  # pre-processing
-  form_data['p63'] = (form_data['p61_6'] - form_data['p63']) / form_data['p63']
-  form_data['p69'] = (form_data['p68_6'] - form_data['p69']) / form_data['p69']
-  start = datetime.strptime(form_data['p71'], "%Y-%m-%d")
-  end = datetime.now()
-  res = (end.year - start.year) * 12 + (end.month - start.month)
-  form_data['p71'] = res
-
   # Adding form_data to json_data array
   json_data.append(form_data)
 
@@ -345,13 +337,22 @@ def evaluate_buildings():
         point = calculate_p34(building[bx_param['code']])
 
       if bx_param['code'] == 'p63':
-        point = calculate_p63(building[bx_param['code']])
+        # pre-processing
+        raw_p63 = (building['p61_6'] - building['p63']) / building['p63']
+        point = calculate_p63(raw_p63)
 
       if bx_param['code'] == 'p69':
-        point = calculate_p69(building[bx_param['code']])
+        # pre-processing
+        raw_p69 = (building['p68_6'] - building['p69']) / building['p69']
+        point = calculate_p69(raw_p69)
 
       if bx_param['code'] == 'p71':
-        point = calculate_p71(building[bx_param['code']])
+        # pre-processing
+        start = datetime.strptime(building['p71'], "%Y-%m-%d")
+        end = datetime.now()
+        res = (end.year - start.year) * 12 + (end.month - start.month)
+        raw_p71 = res
+        point = calculate_p71(raw_p71)
 
       if bx_param['code'] == 'p72':
         point = calculate_p72(building[bx_param['code']])
