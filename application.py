@@ -331,20 +331,32 @@ def evaluate_buildings():
     total_bx = 0
     for bx_param in bx_params:
       if bx_param['code'] == 'p33':
-        point = calculate_p33(building[bx_param['code']])
+        try:
+          point = calculate_p33(building[bx_param['code']])
+        except Exception as e:
+          point = 0
 
       if bx_param['code'] == 'p34':
-        point = calculate_p34(building[bx_param['code']])
+        try:
+          point = calculate_p34(building[bx_param['code']])
+        except Exception as e:
+          point = 0
 
       if bx_param['code'] == 'p63':
         # pre-processing
         raw_p63 = (building['p61_6'] - building['p63']) / building['p63']
-        point = calculate_p63(raw_p63)
+        try:
+          point = calculate_p63(raw_p63)
+        except Exception as e:
+          point = 0
 
       if bx_param['code'] == 'p69':
         # pre-processing
         raw_p69 = (building['p68_6'] - building['p69']) / building['p69']
-        point = calculate_p69(raw_p69)
+        try:
+          point = calculate_p69(raw_p69)
+        except Exception as e:
+          point = 0
 
       if bx_param['code'] == 'p71':
         # pre-processing
@@ -352,13 +364,22 @@ def evaluate_buildings():
         end = datetime.now()
         res = (end.year - start.year) * 12 + (end.month - start.month)
         raw_p71 = res
-        point = calculate_p71(raw_p71)
+        try:
+          point = calculate_p71(raw_p71)
+        except Exception as e:
+          point = 0
 
       if bx_param['code'] == 'p72':
-        point = calculate_p72(building[bx_param['code']])
+        try:
+          point = calculate_p72(building[bx_param['code']])
+        except Exception as e:
+          point = 0
 
       if bx_param['code'] == 'p73':
-        point = calculate_p73(building[bx_param['code']])
+        try:
+          point = calculate_p73(building[bx_param['code']])
+        except Exception as e:
+          point = 0
 
       value = round(point * bx_param['weight'], 4)
 
