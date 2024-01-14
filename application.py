@@ -145,6 +145,12 @@ def create_buildings():
   json_data = json.dumps(form_data, indent=2, separators=(',', ': '))
   return Response(response=json_data, status=200, content_type='application/json')
 
+@app.route('/api/buildings/<int:id>')
+def show_building(id):
+  building = show_building(id)
+  json_data = json.dumps(building, indent=2, separators=(',', ': '))
+  return Response(response=json_data, status=200, content_type='application/json')
+
 @app.route('/')
 def index():
   return render_template('index.html')
@@ -177,16 +183,7 @@ def create():
 @app.route('/buildings/<int:id>')
 def show(id):
   # Reading JSON file
-  try:
-    filename = os.path.join(my_dir, 'data/buildings.json')
-
-    with open(filename, 'r') as file:
-      buildings = json.load(file)
-  except FileNotFoundError:
-    buildings = []
-
-  building = find_json_by('id', buildings, id)
-
+  building = show_building(id)
   return render_template('show.html', building=building)
 
 @app.route('/buildings/<int:id>/evaluate', methods=['POST'])
@@ -513,6 +510,17 @@ def evaluate_buildings():
   with open(filename, 'w') as file:
     json.dump(buildings_json_data, file, indent=2, separators=(',', ': '))
     file.write('\n')  # Adding new line
+
+def show_building(id):
+  try:
+    filename = os.path.join(my_dir, 'data/buildings.json')
+
+    with open(filename, 'r') as file:
+      buildings = json.load(file)
+  except FileNotFoundError:
+    buildings = []
+
+  return find_json_by('id', buildings, id)
 
 if __name__ == '__main__':
   app.run()
