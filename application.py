@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, Response
+from flask import Flask, request, render_template, redirect, url_for, Response, send_file
 from fuzzy_logic.p33 import calculate_p33
 from fuzzy_logic.p34 import calculate_p34
 from fuzzy_logic.p63 import calculate_p63
@@ -190,6 +190,10 @@ def show(id):
 def evaluate(id):
   evaluate_buildings()
   return redirect(url_for('show', id= id))
+
+@app.route('/download_android_apk')
+def download_android_apk():
+  return send_file('app-green-building.apk', as_attachment=True)
 
 def find_json_by(key, array, id):
   for item in array:
